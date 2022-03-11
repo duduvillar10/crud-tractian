@@ -9,9 +9,17 @@ class Asset {
 
     model: string;
 
+    owner: string;
+
     status: string;
 
     health: number;
+
+    unit: string;
+
+    image: string;
+
+    created_at: Date;
 
     constructor() {
         if(!this.id){
