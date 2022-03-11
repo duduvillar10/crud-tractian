@@ -1,32 +1,25 @@
-import { Request, Response } from "express";
-import { AssetsRepository } from "../../typeorm/repositories/AssetsRepository";
-import { CreateAssetUseCase } from "./CreateAssetUseCase";
+import { Request, Response } from 'express';
+import { container } from 'tsyringe';
+import { CreateAssetUseCase } from './CreateAssetUseCase';
 
 class CreateAssetController {
-    async handle(request: Request, response: Response): Promise<any> {
-        const {name, 
-            description, 
-            model, 
-            owner, 
-            status, 
-            health,
-            unit
-        } = request.body;
-        
-        const assetsRepository = AssetsRepository.getInstance()
-        const createAssetUseCase = new CreateAssetUseCase(assetsRepository)
+  async handle(request: Request, response: Response): Promise<any> {
+    const { name, description, model, owner, status, health, unit } =
+      request.body;
 
-        const asset = await createAssetUseCase.execute({name, 
-            description, 
-            model,
-            owner, 
-            status, 
-            health,
-            unit
-        })
-        
-        return response.status(201).json(asset)
-    }
+    const createAssetUseCase = container.resolve(CreateAssetUseCase);
 
+    const asset = await createAssetUseCase.execute({
+      name,
+      description,
+      model,
+      owner,
+      status,
+      health,
+      unit,
+    });
+
+    return response.status(201).json(asset);
+  }
 }
-export { CreateAssetController }
+export { CreateAssetController };
