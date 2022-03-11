@@ -1,37 +1,15 @@
 {
-  "compilerOptions":{
-     "target":"es5",
-     "experimentalDecorators":true,
-     "emitDecoratorMetadata":true,
-     "module":"commonjs",
-     "baseUrl":"./src",
-     "paths":{
-        "@modules/*":[
-           "modules/*"
-        ],
-        "@config/*":[
-           "config/*"
-        ],
-        "@shared/*":[
-           "shared/*"
-        ],
-        "@errors/*":[
-           "errors/*"
-        ],
-        "@utils/*":[
-           "utils/*"
-        ]
-     },
-     "typeRoots":[
-        "./src/@types"
-     ],
-     "types":[
-        "@types/jest",
-        "node"
-     ],
-     "resolveJsonModule":true,
-     "esModuleInterop":true,
-     "forceConsistentCasingInFileNames":true,
-     "skipLibCheck":true
-  }
+   "compilerOptions": {
+      "lib": [
+         "es5"
+      ],
+      "target": "es5",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "outDir": "./build",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "sourceMap": true,
+      "esModuleInterop": true
+   }
 }

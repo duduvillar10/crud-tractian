@@ -1,4 +1,12 @@
-import { Column, CreateDateColumn, Entity, ObjectIdColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  ObjectIdColumn,
+} from 'typeorm';
+import { Unit } from '../../../../units/infra/typeorm/entities/Unit';
 
 @Entity('assets')
 class Asset {
@@ -26,12 +34,9 @@ class Asset {
   @Column()
   image: string;
 
-  @Column()
-  unit_id: string;
-
-  // @ManyToOne(() => Unit)
-  // @JoinColumn({name: 'unit_id'})
-  // unit: Unit;
+  @ManyToOne(() => Unit)
+  @JoinColumn({ name: 'unit' })
+  unit: Unit;
 
   @CreateDateColumn()
   created_at: Date;
