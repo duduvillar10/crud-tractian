@@ -1,12 +1,12 @@
 import { ICreateUnitDTO } from '../../dtos/ICreateUnitDTO';
 import { IUpdateUnitDTO } from '../../dtos/IUpdateUnitDTO';
-import { Unit } from './entities/Unit';
+import { IUnit } from './entities/Unit';
 
 interface IUnitsRepository {
-  create(data: ICreateUnitDTO): Promise<Unit>;
-  findByName(name: string): Promise<Unit>;
-  findById(id: string): Promise<Unit>;
-  listAll(): Promise<Unit[]>;
+  create(data: ICreateUnitDTO): Promise<IUnit>;
+  findByName(name: string): Promise<IUnit>;
+  findById(id: string): Promise<IUnit>;
+  listAll(): Promise<IUnit[]>;
   update(id: string, asset: IUpdateUnitDTO): Promise<void>;
 }
 

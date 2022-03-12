@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { Asset } from '../../infra/typeorm/entities/Asset';
+import { IAsset } from '../../infra/typeorm/entities/Asset';
 import { IAssetsRepository } from '../../infra/typeorm/IAssetsRepository';
 
 @injectable()
@@ -9,7 +9,7 @@ class ListAssetsUseCase {
     private assetsRepository: IAssetsRepository,
   ) {}
 
-  async execute(): Promise<Asset[]> {
+  async execute(): Promise<IAsset[]> {
     return await this.assetsRepository.listAll();
   }
 }

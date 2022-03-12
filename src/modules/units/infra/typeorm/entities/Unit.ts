@@ -1,36 +1,30 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryColumn,
-} from 'typeorm';
-
-import { Asset } from '../../../../assets/infra/typeorm/entities/Asset';
 import { Company } from '../../../../company/infra/typeorm/entities/Company';
+import { Schema, model } from 'mongoose';
+import { IAsset } from '../../../../assets/infra/typeorm/entities/Asset';
 
-@Entity('Unit')
-class Unit {
-  @PrimaryColumn()
-  id: string;
-
-  @Column()
+interface IUnit {
   name: string;
 
-  @Column()
   description: string;
 
-  @OneToMany(() => Asset, asset => asset.unit)
-  asset: Asset[];
+  assets: IAsset[];
 
-  @ManyToOne(() => Company)
-  @JoinColumn({ name: 'company' })
   company: Company;
-
-  @CreateDateColumn()
-  created_at: Date;
 }
 
-export { Unit };
+const schema = new Schema<IUnit>(
+  {
+    name: String,
+
+    description: String,
+
+    assets: [{ type: Schema.Types.ObjectId, ref: 'Asset' }],
+
+    company: String,
+  },
+  { timestamps: true },
+);
+
+const Unit = model<IUnit>('Unit', schema);
+
+export { Unit, IUnit };

@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
-import { AppError } from '../../../../../shared/errors/AppError';
-import { ICreateAssetDTO } from '../../../dtos/ICreateAssetDTO';
-import { IAssetsRepository } from '../../typeorm/IAssetsRepository';
+import { AppError } from '../../../../shared/errors/AppError';
+import { ICreateAssetDTO } from '../../dtos/ICreateAssetDTO';
+import { IAssetsRepository } from '../../infra/typeorm/IAssetsRepository';
 
 @injectable()
 class CreateAssetUseCase {

@@ -1,32 +1,14 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  OneToMany,
-  PrimaryColumn,
-} from 'typeorm';
-import { Unit } from '../../../../units/infra/typeorm/entities/Unit';
+import { IUnit } from '../../../../units/infra/typeorm/entities/Unit';
 import { User } from '../../../../users/infra/typeorm/entities/User';
 
-@Entity('companies')
-class Company {
-  @PrimaryColumn()
-  id: string;
-
-  @Column()
+interface Company {
   name: string;
 
-  @Column()
   description: string;
 
-  @OneToMany(() => Unit, unit => unit.company)
-  unit: Unit[];
+  unit: IUnit[];
 
-  @OneToMany(() => User, user => user.company)
   user: User[];
-
-  @CreateDateColumn()
-  created_at: Date;
 }
 
 export { Company };

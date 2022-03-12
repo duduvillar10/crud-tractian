@@ -1,27 +1,23 @@
 import {
   Column,
   CreateDateColumn,
+  Entity,
   JoinColumn,
   ManyToOne,
   PrimaryColumn,
 } from 'typeorm';
 import { Company } from '../../../../company/infra/typeorm/entities/Company';
 
+@Entity('users')
 class User {
-  @PrimaryColumn()
   id: string;
 
-  @Column()
   name: string;
 
-  @Column()
   description: string;
 
-  @ManyToOne(() => Company)
-  @JoinColumn({ name: 'company' })
   company: Company;
 
-  @CreateDateColumn()
   created_at: Date;
 }
 

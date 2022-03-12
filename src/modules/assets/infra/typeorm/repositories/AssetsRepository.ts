@@ -1,14 +1,14 @@
-import { getMongoRepository, MongoRepository, Repository } from 'typeorm';
 import { ICreateAssetDTO } from '../../../dtos/ICreateAssetDTO';
 import { IUpdateAssetDTO } from '../../../dtos/IUpdateAssetDTO';
-import { Asset } from '../entities/Asset';
+import { IAsset, Asset } from '../entities/Asset';
 import { IAssetsRepository } from '../IAssetsRepository';
+import { Model } from 'mongoose';
 
 class AssetsRepository implements IAssetsRepository {
-  private assetsRepository: MongoRepository<Asset>;
+  private assetsRepository: Model<IAsset>;
 
   constructor() {
-    this.assetsRepository = getMongoRepository(Asset);
+    this.assetsRepository = Asset;
   }
 
   async create({
@@ -19,10 +19,8 @@ class AssetsRepository implements IAssetsRepository {
     status,
     health,
     unit,
-  }: ICreateAssetDTO): Promise<Asset> {
-    const asset = new Asset();
-
-    Object.assign(asset, {
+  }: ICreateAssetDTO): Promise<IAsset> {
+    const asset = new this.assetsRepository({
       name,
       description,
       model,
@@ -32,28 +30,30 @@ class AssetsRepository implements IAssetsRepository {
       unit,
     });
 
-    await this.assetsRepository.save(asset);
+    await asset.save();
 
     return asset;
   }
 
-  async findByName(name: string): Promise<Asset> {
+  async findByName(name: string): Promise<IAsset> {
     const asset = await this.assetsRepository.findOne({ name });
     return asset;
   }
 
-  async findById(id: string): Promise<Asset> {
-    const asset = await this.assetsRepository.findOne({ id });
+  async findById(id: string): Promise<IAsset> {
+    const asset = await this.assetsRepository.findOne({ _id: id });
     return asset;
   }
 
-  async listAll(): Promise<Asset[]> {
-    const all = await this.assetsRepository.find();
+  async listAll(): Promise<IAsset[]> {
+    const all = await this.assetsRepository
+      .find()
+      .populate({ path: 'unit', select: '-assets' });
     return all;
   }
 
   async update(id: string, asset: IUpdateAssetDTO): Promise<void> {
-    await this.assetsRepository.update(id, asset);
+    await this.assetsRepository.updateOne({ _id: id }, asset);
   }
 }
 

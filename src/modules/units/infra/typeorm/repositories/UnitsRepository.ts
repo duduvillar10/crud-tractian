@@ -1,47 +1,46 @@
 import { getMongoRepository, MongoRepository } from 'typeorm';
 import { ICreateUnitDTO } from '../../../dtos/ICreateUnitDTO';
 import { IUpdateUnitDTO } from '../../../dtos/IUpdateUnitDTO';
-import { Unit } from '../entities/Unit';
+import { IUnit, Unit } from '../entities/Unit';
 import { IUnitsRepository } from '../IUnitsRepository';
+import { Model } from 'mongoose';
 
 class UnitsRepository implements IUnitsRepository {
-  private assetsRepository: MongoRepository<Unit>;
+  private unitsRepository: Model<IUnit>;
 
   constructor() {
-    this.assetsRepository = getMongoRepository(Unit);
+    this.unitsRepository = Unit;
   }
 
-  async create({ name, description, company }: ICreateUnitDTO): Promise<Unit> {
-    const unit = new Unit();
-
-    Object.assign(unit, {
+  async create({ name, description, company }: ICreateUnitDTO): Promise<IUnit> {
+    const unit = new this.unitsRepository({
       name,
       description,
       company,
     });
 
-    await this.assetsRepository.save(unit);
+    await unit.save();
 
     return unit;
   }
 
-  async findByName(name: string): Promise<Unit> {
-    const Unit = await this.assetsRepository.findOne({ name });
+  async findByName(name: string): Promise<IUnit> {
+    const Unit = await this.unitsRepository.findOne({ name });
     return Unit;
   }
 
-  async findById(id: string): Promise<Unit> {
-    const unit = await this.assetsRepository.findOne({ id });
+  async findById(id: string): Promise<IUnit> {
+    const unit = await this.unitsRepository.findOne({ _id: id });
     return unit;
   }
 
-  async listAll(): Promise<Unit[]> {
-    const all = await this.assetsRepository.find();
+  async listAll(): Promise<IUnit[]> {
+    const all = await this.unitsRepository.find();
     return all;
   }
 
   async update(id: string, unit: IUpdateUnitDTO): Promise<void> {
-    await this.assetsRepository.update(id, unit);
+    await this.unitsRepository.updateOne({ _id: id }, unit);
   }
 }
 

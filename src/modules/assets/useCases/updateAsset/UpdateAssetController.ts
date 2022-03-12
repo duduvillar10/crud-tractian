@@ -4,7 +4,8 @@ import { UpdateAssetUseCase } from './UpdateAssetUseCase';
 
 class UpdateAssetController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name, description, model, owner, status, health } = request.body;
+    const { name, description, model, owner, status, health, unit } =
+      request.body;
 
     const { id } = request.params;
 
@@ -17,9 +18,10 @@ class UpdateAssetController {
       owner,
       status,
       health,
+      unit,
     });
 
-    return response.status(201).send();
+    return response.status(204).send();
   }
 }
 

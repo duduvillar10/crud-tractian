@@ -1,7 +1,7 @@
 class ICreateUnitDTO {
   name: string;
   description: string;
-  company: string;
+  company?: string;
 }
 
 export { ICreateUnitDTO };

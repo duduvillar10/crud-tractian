@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { CreateAssetController } from '../../../../modules/assets/infra/useCases/createAsset/CreateAssetController';
-import { ListAssetsController } from '../../../../modules/assets/infra/useCases/listAssets/ListAssetsController';
-import { UpdateAssetController } from '../../../../modules/assets/infra/useCases/updateAsset/UpdateAssetController';
+import { CreateAssetController } from '../../../../modules/assets/useCases/createAsset/CreateAssetController';
+import { ListAssetsController } from '../../../../modules/assets/useCases/listAssets/ListAssetsController';
+import { UpdateAssetController } from '../../../../modules/assets/useCases/updateAsset/UpdateAssetController';
 
 const assetsRoutes = Router();
 

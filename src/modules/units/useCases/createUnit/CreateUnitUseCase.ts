@@ -17,12 +17,12 @@ class CreateUnitUseCase {
       throw new AppError('This name already exists!');
     }
 
-    const asset = await this.unitsRepository.create({
+    const unit = await this.unitsRepository.create({
       name,
       description,
       company,
     });
-    return asset;
+    return unit;
   }
 }
 
