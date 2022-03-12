@@ -1,5 +1,6 @@
 import { getMongoRepository, MongoRepository } from 'typeorm';
 import { ICreateUnitDTO } from '../../../dtos/ICreateUnitDTO';
+import { IUpdateUnitDTO } from '../../../dtos/IUpdateUnitDTO';
 import { Unit } from '../entities/Unit';
 import { IUnitsRepository } from '../IUnitsRepository';
 
@@ -19,18 +20,28 @@ class UnitsRepository implements IUnitsRepository {
       company,
     });
 
-    this.assetsRepository.save(unit);
+    await this.assetsRepository.save(unit);
 
     return unit;
   }
 
-  async findById(id: string): Promise<Unit> {
-    return this.assetsRepository.findOne({ id });
+  async findByName(name: string): Promise<Unit> {
+    const Unit = await this.assetsRepository.findOne({ name });
+    return Unit;
   }
 
-  async listAll(name: string): Promise<Unit[]> {
-    const all = this.assetsRepository.find({ name });
+  async findById(id: string): Promise<Unit> {
+    const unit = await this.assetsRepository.findOne({ id });
+    return unit;
+  }
+
+  async listAll(): Promise<Unit[]> {
+    const all = await this.assetsRepository.find();
     return all;
+  }
+
+  async update(id: string, unit: IUpdateUnitDTO): Promise<void> {
+    await this.assetsRepository.update(id, unit);
   }
 }
 
