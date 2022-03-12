@@ -15,9 +15,15 @@ class UpdateAssetUseCase {
     id: string,
     { name, description, model, owner, status, health }: IUpdateAssetDTO,
   ) {
-    const assetAlreadyExits = await this.assetsRepository.findByName(name);
+    const assetAlreadyExits = await this.assetsRepository.findById(id);
 
-    if (assetAlreadyExits) {
+    if (!assetAlreadyExits) {
+      throw new AppError("This asset doesn't exists!");
+    }
+
+    const assetNameAlreadyExits = await this.assetsRepository.findByName(name);
+
+    if (assetNameAlreadyExits) {
       throw new AppError('This name already exists!');
     }
 

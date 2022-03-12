@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
-import { Asset } from '../../typeorm/entities/Asset';
-import { IAssetsRepository } from '../../typeorm/IAssetsRepository';
+import { Asset } from '../../infra/typeorm/entities/Asset';
+import { IAssetsRepository } from '../../infra/typeorm/IAssetsRepository';
 
 @injectable()
 class ListAssetsUseCase {

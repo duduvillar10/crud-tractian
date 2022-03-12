@@ -22,7 +22,7 @@ class Company {
   @OneToMany(() => Unit, unit => unit.company)
   unit: Unit[];
 
-  @OneToMany(() => Unit, unit => unit.company)
+  @OneToMany(() => User, user => user.company)
   user: User[];
 
   @CreateDateColumn()

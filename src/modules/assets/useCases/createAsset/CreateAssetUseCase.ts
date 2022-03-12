@@ -19,9 +19,9 @@ class CreateAssetUseCase {
     health,
     unit,
   }: ICreateAssetDTO) {
-    const assetAlreadyExits = await this.assetsRepository.findByName(name);
+    const assetNameAlreadyExits = await this.assetsRepository.findByName(name);
 
-    if (assetAlreadyExits) {
+    if (assetNameAlreadyExits) {
       throw new AppError('This name already exists!');
     }
 

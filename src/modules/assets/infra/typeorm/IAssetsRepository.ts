@@ -4,7 +4,8 @@ import { Asset } from './entities/Asset';
 
 interface IAssetsRepository {
   create(data: ICreateAssetDTO): Promise<Asset>;
-  findByName(id: string): Promise<Asset>;
+  findByName(name: string): Promise<Asset>;
+  findById(id: string): Promise<Asset>;
   listAll(): Promise<Asset[]>;
   update(id: string, asset: IUpdateAssetDTO): Promise<void>;
 }

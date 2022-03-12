@@ -18,6 +18,7 @@ class AssetsRepository implements IAssetsRepository {
     owner,
     status,
     health,
+    unit,
   }: ICreateAssetDTO): Promise<Asset> {
     const asset = new Asset();
 
@@ -28,6 +29,7 @@ class AssetsRepository implements IAssetsRepository {
       owner,
       status,
       health,
+      unit,
     });
 
     await this.assetsRepository.save(asset);
@@ -37,6 +39,11 @@ class AssetsRepository implements IAssetsRepository {
 
   async findByName(name: string): Promise<Asset> {
     const asset = await this.assetsRepository.findOne({ name });
+    return asset;
+  }
+
+  async findById(id: string): Promise<Asset> {
+    const asset = await this.assetsRepository.findOne({ id });
     return asset;
   }
 
