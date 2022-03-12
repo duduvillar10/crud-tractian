@@ -1,0 +1,29 @@
+import { inject, injectable } from 'tsyringe';
+import { AppError } from '../../../../shared/errors/AppError';
+import { ICreateUnitDTO } from '../../dtos/ICreateUnitDTO';
+import { IUnitsRepository } from '../../infra/typeorm/IUnitsRepository';
+
+@injectable()
+class CreateUnitUseCase {
+  constructor(
+    @inject('UnitsRepository')
+    private unitsRepository: IUnitsRepository,
+  ) {}
+
+  async execute({ name, description, company }: ICreateUnitDTO) {
+    const unitNameAlreadyExits = await this.unitsRepository.findByName(name);
+
+    if (unitNameAlreadyExits) {
+      throw new AppError('This name already exists!');
+    }
+
+    const asset = await this.unitsRepository.create({
+      name,
+      description,
+      company,
+    });
+    return asset;
+  }
+}
+
+export { CreateUnitUseCase };
