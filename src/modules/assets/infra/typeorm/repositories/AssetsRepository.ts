@@ -1,5 +1,6 @@
 import { getMongoRepository, MongoRepository, Repository } from 'typeorm';
 import { ICreateAssetDTO } from '../../../dtos/ICreateAssetDTO';
+import { IUpdateAssetDTO } from '../../../dtos/IUpdateAssetDTO';
 import { Asset } from '../entities/Asset';
 import { IAssetsRepository } from '../IAssetsRepository';
 
@@ -29,18 +30,23 @@ class AssetsRepository implements IAssetsRepository {
       health,
     });
 
-    this.assetsRepository.save(asset);
+    await this.assetsRepository.save(asset);
 
     return asset;
   }
 
-  async findById(id: string): Promise<Asset> {
-    return this.assetsRepository.findOne({ id });
+  async findByName(name: string): Promise<Asset> {
+    const asset = await this.assetsRepository.findOne({ name });
+    return asset;
   }
 
-  async listAll(name: string): Promise<Asset[]> {
-    const all = this.assetsRepository.find({ name });
+  async listAll(): Promise<Asset[]> {
+    const all = await this.assetsRepository.find();
     return all;
+  }
+
+  async update(id: string, asset: IUpdateAssetDTO): Promise<void> {
+    await this.assetsRepository.update(id, asset);
   }
 }
 
