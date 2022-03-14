@@ -8,6 +8,7 @@ interface IAssetsRepository {
   findById(id: string): Promise<IAsset>;
   listAll(): Promise<IAsset[]>;
   update(id: string, asset: IUpdateAssetDTO): Promise<void>;
+  delete(id: string): Promise<void>;
 }
 
 export { IAssetsRepository };

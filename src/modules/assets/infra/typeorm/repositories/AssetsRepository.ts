@@ -55,6 +55,10 @@ class AssetsRepository implements IAssetsRepository {
   async update(id: string, asset: IUpdateAssetDTO): Promise<void> {
     await this.assetsRepository.updateOne({ _id: id }, asset);
   }
+
+  async delete(id: string): Promise<void> {
+    await this.assetsRepository.deleteOne({ _id: id });
+  }
 }
 
 export { AssetsRepository };
