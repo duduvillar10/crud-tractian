@@ -1,7 +1,7 @@
-import { ICreateAssetDTO } from '../../../dtos/ICreateAssetDTO';
-import { IUpdateAssetDTO } from '../../../dtos/IUpdateAssetDTO';
+import { ICreateAssetDTO } from '../../dtos/ICreateAssetDTO';
+import { IUpdateAssetDTO } from '../../dtos/IUpdateAssetDTO';
 import { IAsset, Asset } from '../entities/Asset';
-import { IAssetsRepository } from '../IAssetsRepository';
+import { IAssetsRepository } from './IAssetsRepository';
 import { Model } from 'mongoose';
 
 class AssetsRepository implements IAssetsRepository {
