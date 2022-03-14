@@ -10,8 +10,6 @@ class UpdateAssetUseCase {
   constructor(
     @inject('AssetsRepository')
     private assetsRepository: IAssetsRepository,
-    @inject('UnitsRepository')
-    private unitsRepository: IUnitsRepository,
   ) {}
 
   async execute(

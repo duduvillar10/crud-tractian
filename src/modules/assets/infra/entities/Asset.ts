@@ -1,7 +1,7 @@
 import { IUnit } from '../../../units/infra/entities/Unit';
-import { Schema, model } from 'mongoose';
+import { Schema, model, ObjectId } from 'mongoose';
 interface IAsset {
-  _id: string;
+  _id: ObjectId;
 
   name: string;
 

@@ -13,7 +13,7 @@ interface ICompany {
 }
 
 const schema = new Schema<ICompany>({
-  name: { type: String },
+  name: { type: String, required: true },
   description: { type: String },
   unit: [{ type: Schema.Types.ObjectId, ref: 'Unit' }],
   user: [{ type: Schema.Types.ObjectId, ref: 'User' }],
