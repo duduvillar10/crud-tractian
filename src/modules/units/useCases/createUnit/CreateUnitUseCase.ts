@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/AppError';
 import { ICreateUnitDTO } from '../../dtos/ICreateUnitDTO';
-import { IUnitsRepository } from '../../infra/typeorm/IUnitsRepository';
+import { IUnitsRepository } from '../../infra/repositories/IUnitsRepository';
 
 @injectable()
 class CreateUnitUseCase {

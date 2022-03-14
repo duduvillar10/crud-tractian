@@ -1,6 +1,6 @@
-import { Company } from '../../../../company/infra/typeorm/entities/Company';
+import { ICompany } from '../../../company/infra/entities/Company';
 import { Schema, model } from 'mongoose';
-import { IAsset } from '../../../../assets/infra/typeorm/entities/Asset';
+import { IAsset } from '../../../assets/infra/entities/Asset';
 
 interface IUnit {
   name: string;
@@ -9,7 +9,7 @@ interface IUnit {
 
   assets: IAsset[];
 
-  company: Company;
+  company: ICompany;
 }
 
 const schema = new Schema<IUnit>(
@@ -20,7 +20,7 @@ const schema = new Schema<IUnit>(
 
     assets: [{ type: Schema.Types.ObjectId, ref: 'Asset' }],
 
-    company: String,
+    company: { type: Schema.Types.ObjectId, ref: 'Company' },
   },
   { timestamps: true },
 );

@@ -1,9 +1,10 @@
-import { getMongoRepository, MongoRepository } from 'typeorm';
-import { ICreateUnitDTO } from '../../../dtos/ICreateUnitDTO';
-import { IUpdateUnitDTO } from '../../../dtos/IUpdateUnitDTO';
+import { ICreateUnitDTO } from '../../dtos/ICreateUnitDTO';
+import { IUpdateUnitDTO } from '../../dtos/IUpdateUnitDTO';
 import { IUnit, Unit } from '../entities/Unit';
-import { IUnitsRepository } from '../IUnitsRepository';
+import { IUnitsRepository } from './IUnitsRepository';
 import { Model } from 'mongoose';
+import { ObjectId } from 'mongodb';
+import { IAsset } from '../../../assets/infra/entities/Asset';
 
 class UnitsRepository implements IUnitsRepository {
   private unitsRepository: Model<IUnit>;
@@ -35,12 +36,23 @@ class UnitsRepository implements IUnitsRepository {
   }
 
   async listAll(): Promise<IUnit[]> {
-    const all = await this.unitsRepository.find();
+    const all = await this.unitsRepository.find().populate({ path: 'assets' });
     return all;
   }
 
   async update(id: string, unit: IUpdateUnitDTO): Promise<void> {
     await this.unitsRepository.updateOne({ _id: id }, unit);
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.unitsRepository.deleteOne({ _id: id });
+  }
+
+  async deleteAsset(asset: IAsset): Promise<void> {
+    await this.unitsRepository.updateOne(
+      { _id: asset.unit },
+      { $pull: { assets: { _id: asset._id } } },
+    );
   }
 }
 

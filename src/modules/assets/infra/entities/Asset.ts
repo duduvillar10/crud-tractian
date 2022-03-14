@@ -1,6 +1,8 @@
-import { IUnit } from '../../../../units/infra/typeorm/entities/Unit';
+import { IUnit } from '../../../units/infra/entities/Unit';
 import { Schema, model } from 'mongoose';
 interface IAsset {
+  _id: string;
+
   name: string;
 
   description: string;
@@ -15,19 +17,22 @@ interface IAsset {
 
   image: string;
 
-  unit?: IUnit;
+  unit: IUnit;
 }
 
-const schema = new Schema<IAsset>({
-  name: { type: String },
-  description: { type: String },
-  model: { type: String },
-  owner: { type: String },
-  status: { type: String },
-  health: { type: Number },
-  image: { type: String },
-  unit: { type: Schema.Types.ObjectId, ref: 'Unit' },
-});
+const schema = new Schema<IAsset>(
+  {
+    name: { type: String, required: true },
+    description: { type: String },
+    model: { type: String },
+    owner: { type: String },
+    status: { type: String },
+    health: { type: Number },
+    image: { type: String },
+    unit: { type: Schema.Types.ObjectId, ref: 'Unit', required: true },
+  },
+  { timestamps: true },
+);
 
 const Asset = model<IAsset>('Asset', schema);
 

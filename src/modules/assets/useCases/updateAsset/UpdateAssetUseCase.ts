@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/AppError';
+import { IUnitsRepository } from '../../../units/infra/repositories/IUnitsRepository';
 import { IUpdateAssetDTO } from '../../dtos/IUpdateAssetDTO';
 import { Asset } from '../../infra/entities/Asset';
 import { IAssetsRepository } from '../../infra/repositories/IAssetsRepository';
@@ -9,11 +10,13 @@ class UpdateAssetUseCase {
   constructor(
     @inject('AssetsRepository')
     private assetsRepository: IAssetsRepository,
+    @inject('UnitsRepository')
+    private unitsRepository: IUnitsRepository,
   ) {}
 
   async execute(
     id: string,
-    { name, description, model, owner, status, health, unit }: IUpdateAssetDTO,
+    { name, description, model, owner, status, health }: IUpdateAssetDTO,
   ) {
     const assetAlreadyExits = await this.assetsRepository.findById(id);
 
@@ -38,7 +41,6 @@ class UpdateAssetUseCase {
       owner,
       status,
       health,
-      unit,
     };
 
     Object.keys(updatedAsset).forEach(key =>

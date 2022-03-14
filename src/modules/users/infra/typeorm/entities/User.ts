@@ -1,4 +1,4 @@
-import { Company } from '../../../../company/infra/typeorm/entities/Company';
+import { Company } from '../../../../company/infra/entities/Company';
 
 class User {
   id: string;

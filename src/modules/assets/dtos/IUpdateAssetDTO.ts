@@ -1,4 +1,4 @@
-import { Unit } from '../../units/infra/typeorm/entities/Unit';
+import { Unit } from '../../units/infra/entities/Unit';
 
 interface IUpdateAssetDTO {
   name?: string;
@@ -7,6 +7,5 @@ interface IUpdateAssetDTO {
   owner?: string;
   status?: string;
   health?: number;
-  unit?: string;
 }
 export { IUpdateAssetDTO };
