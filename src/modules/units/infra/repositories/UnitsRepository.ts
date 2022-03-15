@@ -3,8 +3,6 @@ import { IUpdateUnitDTO } from '../../dtos/IUpdateUnitDTO';
 import { IUnit, Unit } from '../entities/Unit';
 import { IUnitsRepository } from './IUnitsRepository';
 import { Model } from 'mongoose';
-import { ObjectId } from 'mongodb';
-import { IAsset } from '../../../assets/infra/entities/Asset';
 
 class UnitsRepository implements IUnitsRepository {
   private unitsRepository: Model<IUnit>;
@@ -46,13 +44,6 @@ class UnitsRepository implements IUnitsRepository {
 
   async delete(id: string): Promise<void> {
     await this.unitsRepository.deleteOne({ _id: id });
-  }
-
-  async deleteAsset(asset: IAsset): Promise<void> {
-    await this.unitsRepository.updateOne(
-      { _id: asset.unit },
-      { $pull: { assets: { _id: asset._id } } },
-    );
   }
 }
 

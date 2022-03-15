@@ -11,7 +11,6 @@ interface IUnitsRepository {
   listAll(): Promise<IUnit[]>;
   update(id: string, unit: IUpdateUnitDTO): Promise<void>;
   delete(id: string): Promise<void>;
-  deleteAsset(asset: IAsset): Promise<void>;
 }
 
 export { IUnitsRepository };

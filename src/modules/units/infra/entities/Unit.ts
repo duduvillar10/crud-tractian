@@ -1,10 +1,8 @@
-import { ICompany } from '../../../company/infra/entities/Company';
+import { Company, ICompany } from '../../../company/infra/entities/Company';
 import { Schema, model, ObjectId } from 'mongoose';
-import { IAsset } from '../../../assets/infra/entities/Asset';
+import { Asset, IAsset } from '../../../assets/infra/entities/Asset';
 
 interface IUnit {
-  _id: ObjectId;
-
   name: string;
 
   description: string;
@@ -26,6 +24,17 @@ const schema = new Schema<IUnit>(
   },
   { timestamps: true },
 );
+
+schema.pre('deleteOne', async function (next) {
+  await Company.updateOne(
+    { units: { $in: [this._conditions._id] } },
+    { $pull: { units: { _id: this._conditions._id } } },
+  );
+
+  await Asset.deleteMany({ unit: this._conditions._id });
+
+  next();
+});
 
 const Unit = model<IUnit>('Unit', schema);
 
