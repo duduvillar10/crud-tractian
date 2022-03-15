@@ -5,6 +5,7 @@
   "repository": "https://github.com/duduvillar10/crud-tractian",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.3",
     "express-async-errors": "^3.1.1",
     "mongodb": "^4.4.1",
@@ -15,6 +16,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.13",
     "@types/mongodb": "^4.0.7",
     "@types/mongoose": "^5.11.97",

@@ -5,6 +5,8 @@ import { UnitsRepository } from '../../modules/units/infra/repositories/UnitsRep
 import { IUnitsRepository } from '../../modules/units/infra/repositories/IUnitsRepository';
 import { ICompaniesRepository } from '../../modules/company/infra/repositories/ICompaniesRepository';
 import { CompaniesRepository } from '../../modules/company/infra/repositories/CompaniesRepository';
+import { IUsersRepository } from '../../modules/users/infra/repositories/IUsersRepository';
+import { UsersRepository } from '../../modules/users/infra/repositories/UsersRepository';
 
 container.registerSingleton<IAssetsRepository>(
   'AssetsRepository',
@@ -17,4 +19,8 @@ container.registerSingleton<IUnitsRepository>(
 container.registerSingleton<ICompaniesRepository>(
   'CompaniesRepository',
   CompaniesRepository,
+);
+container.registerSingleton<IUsersRepository>(
+  'UsersRepository',
+  UsersRepository,
 );
