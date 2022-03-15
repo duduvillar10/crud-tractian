@@ -3,7 +3,7 @@ import { IUser } from '../entities/User';
 
 interface IUsersRepository {
   create(data: ICreateUserDTO): Promise<IUser>;
-  findByName(name: string): Promise<IUser>;
+  findByEmail(email: string): Promise<IUser>;
   findById(id: string): Promise<IUser>;
   listAll(): Promise<IUser[]>;
   update(id: string, user: ICreateUserDTO): Promise<void>;

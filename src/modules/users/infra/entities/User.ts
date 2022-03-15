@@ -6,7 +6,7 @@ interface IUser {
   email: string;
   password: string;
   cpf: string;
-  isAdmin: boolean;
+  isAdmin?: boolean;
   company: ICompany;
 }
 
@@ -16,7 +16,7 @@ const schema = new Schema<IUser>(
     email: { type: String, required: true },
     password: { type: String, required: true },
     cpf: { type: String, required: true },
-    isAdmin: { type: Boolean, required: true },
+    isAdmin: { type: Boolean },
     company: { type: Schema.Types.ObjectId, ref: 'Company', required: true },
   },
   { timestamps: true },
