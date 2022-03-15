@@ -7,16 +7,16 @@ interface ICompany {
 
   description: string;
 
-  unit: IUnit[];
+  units: IUnit[];
 
-  user: User[];
+  users: User[];
 }
 
 const schema = new Schema<ICompany>({
   name: { type: String, required: true },
   description: { type: String },
-  unit: [{ type: Schema.Types.ObjectId, ref: 'Unit' }],
-  user: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  units: [{ type: Schema.Types.ObjectId, ref: 'Unit' }],
+  users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 
 const Company = model<ICompany>('Company', schema);
