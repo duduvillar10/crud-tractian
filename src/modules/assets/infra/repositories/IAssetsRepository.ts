@@ -1,6 +1,6 @@
 import { ICreateAssetDTO } from '../../dtos/ICreateAssetDTO';
 import { IUpdateAssetDTO } from '../../dtos/IUpdateAssetDTO';
-import { Asset, IAsset } from '../entities/Asset';
+import { IAsset } from '../entities/Asset';
 
 interface IAssetsRepository {
   create(data: ICreateAssetDTO): Promise<IAsset>;
