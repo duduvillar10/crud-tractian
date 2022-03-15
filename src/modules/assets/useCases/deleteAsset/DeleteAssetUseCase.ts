@@ -8,8 +8,6 @@ class DeleteAssetUseCase {
   constructor(
     @inject('AssetsRepository')
     private assetsRepository: IAssetsRepository,
-    @inject('UnitsRepository')
-    private unitsRepository: IUnitsRepository,
   ) {}
 
   async execute(id: string): Promise<void> {
@@ -19,7 +17,6 @@ class DeleteAssetUseCase {
       throw new AppError("This asset doesn't exists!", 404);
     }
 
-    await this.unitsRepository.deleteAsset(assetExits);
     await this.assetsRepository.delete(id);
   }
 }

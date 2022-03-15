@@ -1,8 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/AppError';
-import { IUnitsRepository } from '../../../units/infra/repositories/IUnitsRepository';
 import { IUpdateAssetDTO } from '../../dtos/IUpdateAssetDTO';
-import { Asset } from '../../infra/entities/Asset';
 import { IAssetsRepository } from '../../infra/repositories/IAssetsRepository';
 
 @injectable()
@@ -16,9 +14,9 @@ class UpdateAssetUseCase {
     id: string,
     { name, description, model, owner, status, health }: IUpdateAssetDTO,
   ) {
-    const assetAlreadyExits = await this.assetsRepository.findById(id);
+    const assetExits = await this.assetsRepository.findById(id);
 
-    if (!assetAlreadyExits) {
+    if (!assetExits) {
       throw new AppError("This asset doesn't exists!", 404);
     }
 

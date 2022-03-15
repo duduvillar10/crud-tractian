@@ -1,8 +1,6 @@
-import { IUnit } from '../../../units/infra/entities/Unit';
+import { IUnit, Unit } from '../../../units/infra/entities/Unit';
 import { Schema, model, ObjectId } from 'mongoose';
 interface IAsset {
-  _id: ObjectId;
-
   name: string;
 
   description: string;
@@ -33,6 +31,15 @@ const schema = new Schema<IAsset>(
   },
   { timestamps: true },
 );
+
+schema.pre('deleteOne', async function (next) {
+  await Unit.updateOne(
+    { assets: { $in: [this._conditions._id] } },
+    { $pull: { assets: { _id: this._conditions._id } } },
+  );
+
+  next();
+});
 
 const Asset = model<IAsset>('Asset', schema);
 
