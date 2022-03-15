@@ -33,7 +33,7 @@ class CompaniesRepository {
   async listAll(): Promise<ICompany[]> {
     const all = await this.companiesRepository
       .find()
-      .populate({ path: 'units', select: '-assets' });
+      .populate({ path: 'units', select: '-company' });
     return all;
   }
 
@@ -42,7 +42,9 @@ class CompaniesRepository {
   }
 
   async delete(id: string): Promise<void> {
-    await this.companiesRepository.deleteOne({ _id: id });
+    await this.companiesRepository.deleteOne({
+      _id: id,
+    });
   }
 }
 
