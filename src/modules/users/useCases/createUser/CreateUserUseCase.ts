@@ -27,12 +27,12 @@ class CreateUserUseCase {
       throw new AppError("This company doesn't exists!");
     }
 
-    const passowordHash = await hash(password, 8);
+    const passwordHash = await hash(password, 8);
 
     const user = await this.usersRepository.create({
       name,
       email,
-      password: passowordHash,
+      password: passwordHash,
       cpf,
       company,
     });

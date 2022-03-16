@@ -15,7 +15,7 @@ interface ICompany {
 
 const schema = new Schema<ICompany>({
   name: { type: String, required: true },
-  description: { type: String },
+  description: { type: String, required: true },
   units: [{ type: Schema.Types.ObjectId, ref: 'Unit' }],
   users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });

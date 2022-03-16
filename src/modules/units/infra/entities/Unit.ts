@@ -16,7 +16,7 @@ const schema = new Schema<IUnit>(
   {
     name: { type: String, required: true },
 
-    description: String,
+    description: { type: String, required: true },
 
     assets: [{ type: Schema.Types.ObjectId, ref: 'Asset' }],
 

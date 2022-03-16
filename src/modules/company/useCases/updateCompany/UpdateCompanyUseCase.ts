@@ -17,14 +17,12 @@ class UpdateCompanyUseCase {
       throw new AppError("This company doesn't exists!", 404);
     }
 
-    if (name) {
-      const companyNameAlreadyExits = await this.companiesRepository.findByName(
-        name,
-      );
+    const companyNameAlreadyExits = await this.companiesRepository.findByName(
+      name,
+    );
 
-      if (companyNameAlreadyExits) {
-        throw new AppError('This name already exists!');
-      }
+    if (companyNameAlreadyExits) {
+      throw new AppError('This name already exists!');
     }
 
     const updatedCompany = {
@@ -35,8 +33,11 @@ class UpdateCompanyUseCase {
     Object.keys(updatedCompany).forEach(key =>
       updatedCompany[key] === undefined ? delete updatedCompany[key] : {},
     );
-
-    this.companiesRepository.update(id, updatedCompany);
+    try {
+      await this.companiesRepository.update(id, updatedCompany);
+    } catch {
+      throw new AppError('Invalid inputs');
+    }
   }
 }
 

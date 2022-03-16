@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/AppError';
 import { IUpdateAssetDTO } from '../../dtos/IUpdateAssetDTO';
+import { Status } from '../../infra/entities/Asset';
 import { IAssetsRepository } from '../../infra/repositories/IAssetsRepository';
 
 @injectable()
@@ -12,7 +13,7 @@ class UpdateAssetUseCase {
 
   async execute(
     id: string,
-    { name, description, model, owner, status, health }: IUpdateAssetDTO,
+    { name, description, model, owner, status, health, image }: IUpdateAssetDTO,
   ) {
     const assetExits = await this.assetsRepository.findById(id);
 
@@ -20,14 +21,10 @@ class UpdateAssetUseCase {
       throw new AppError("This asset doesn't exists!", 404);
     }
 
-    if (name) {
-      const assetNameAlreadyExits = await this.assetsRepository.findByName(
-        name,
-      );
+    const assetNameAlreadyExits = await this.assetsRepository.findByName(name);
 
-      if (assetNameAlreadyExits) {
-        throw new AppError('This name already exists!');
-      }
+    if (assetNameAlreadyExits) {
+      throw new AppError('This name already exists!');
     }
 
     const updatedAsset = {
@@ -37,13 +34,18 @@ class UpdateAssetUseCase {
       owner,
       status,
       health,
+      image,
     };
 
     Object.keys(updatedAsset).forEach(key =>
       updatedAsset[key] === undefined ? delete updatedAsset[key] : {},
     );
 
-    this.assetsRepository.update(id, updatedAsset);
+    try {
+      await this.assetsRepository.update(id, updatedAsset);
+    } catch {
+      throw new AppError('Invalid inputs!!');
+    }
   }
 }
 

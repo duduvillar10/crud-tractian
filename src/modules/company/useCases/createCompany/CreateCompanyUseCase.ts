@@ -1,6 +1,5 @@
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/AppError';
-import { IUnitsRepository } from '../../../units/infra/repositories/IUnitsRepository';
 import { ICreateCompanyDTO } from '../../dtos/ICreateCompanyDTO';
 import { ICompaniesRepository } from '../../infra/repositories/ICompaniesRepository';
 

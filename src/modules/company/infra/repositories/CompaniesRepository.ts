@@ -38,7 +38,12 @@ class CompaniesRepository {
   }
 
   async update(id: string, company: ICreateCompanyDTO): Promise<void> {
-    await this.companiesRepository.updateOne({ _id: id }, company);
+    await this.companiesRepository.updateOne({ _id: id }, company, {
+      upsert: true,
+      new: true,
+      runValidators: true,
+      setDefaultsOnInsert: true,
+    });
   }
 
   async delete(id: string): Promise<void> {

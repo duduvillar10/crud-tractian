@@ -16,18 +16,16 @@ class AssetsRepository implements IAssetsRepository {
     description,
     model,
     owner,
-    status,
-    health,
     unit,
+    image,
   }: ICreateAssetDTO): Promise<IAsset> {
     const asset = new this.assetsRepository({
       name,
       description,
       model,
       owner,
-      status,
-      health,
       unit,
+      image,
     });
 
     await asset.save();
@@ -53,7 +51,12 @@ class AssetsRepository implements IAssetsRepository {
   }
 
   async update(id: string, asset: IUpdateAssetDTO): Promise<void> {
-    await this.assetsRepository.updateOne({ _id: id }, asset);
+    await this.assetsRepository.updateOne({ _id: id }, asset, {
+      upsert: true,
+      new: true,
+      runValidators: true,
+      setDefaultsOnInsert: true,
+    });
   }
 
   async delete(id: string): Promise<void> {

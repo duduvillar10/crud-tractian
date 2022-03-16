@@ -39,7 +39,12 @@ class UnitsRepository implements IUnitsRepository {
   }
 
   async update(id: string, unit: IUpdateUnitDTO): Promise<void> {
-    await this.unitsRepository.updateOne({ _id: id }, unit);
+    await this.unitsRepository.updateOne({ _id: id }, unit, {
+      upsert: true,
+      new: true,
+      runValidators: true,
+      setDefaultsOnInsert: true,
+    });
   }
 
   async delete(id: string): Promise<void> {

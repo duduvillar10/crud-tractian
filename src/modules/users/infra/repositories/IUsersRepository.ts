@@ -1,4 +1,5 @@
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
+import { IUpdateUserDTO } from '../../dtos/IUpdateUserDTO';
 import { IUser } from '../entities/User';
 
 interface IUsersRepository {
@@ -6,7 +7,7 @@ interface IUsersRepository {
   findByEmail(email: string): Promise<IUser>;
   findById(id: string): Promise<IUser>;
   listAll(): Promise<IUser[]>;
-  update(id: string, user: ICreateUserDTO): Promise<void>;
+  update(id: string, user: IUpdateUserDTO): Promise<void>;
   delete(id: string): Promise<void>;
 }
 

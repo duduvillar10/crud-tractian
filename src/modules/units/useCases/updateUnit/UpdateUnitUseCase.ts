@@ -17,12 +17,10 @@ class UpdateUnitUseCase {
       throw new AppError("This unit doesn't exists!", 404);
     }
 
-    if (name) {
-      const unitNameAlreadyExits = await this.unitsRepository.findByName(name);
+    const unitNameAlreadyExits = await this.unitsRepository.findByName(name);
 
-      if (unitNameAlreadyExits) {
-        throw new AppError('This name already exists!');
-      }
+    if (unitNameAlreadyExits) {
+      throw new AppError('This name already exists!');
     }
 
     const updatedUnit = {
@@ -33,8 +31,11 @@ class UpdateUnitUseCase {
     Object.keys(updatedUnit).forEach(key =>
       updatedUnit[key] === undefined ? delete updatedUnit[key] : {},
     );
-
-    this.unitsRepository.update(id, updatedUnit);
+    try {
+      await this.unitsRepository.update(id, updatedUnit);
+    } catch {
+      throw new AppError('Invalid inputs!');
+    }
   }
 }
 

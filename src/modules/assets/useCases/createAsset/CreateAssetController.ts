@@ -4,8 +4,7 @@ import { CreateAssetUseCase } from './CreateAssetUseCase';
 
 class CreateAssetController {
   async handle(request: Request, response: Response): Promise<any> {
-    const { name, description, model, owner, status, health, unit } =
-      request.body;
+    const { name, description, model, owner, unit, image } = request.body;
 
     const createAssetUseCase = container.resolve(CreateAssetUseCase);
 
@@ -14,9 +13,8 @@ class CreateAssetController {
       description,
       model,
       owner,
-      status,
-      health,
       unit,
+      image,
     });
 
     return response.status(201).json(asset);

@@ -1,5 +1,5 @@
+import { hash } from 'bcrypt';
 import { inject, injectable } from 'tsyringe';
-import { AppError } from '../../../../shared/errors/AppError';
 import { IUpdateUserDTO } from '../../dtos/IUpdateUserDTO';
 import { IUsersRepository } from '../../infra/repositories/IUsersRepository';
 
@@ -10,17 +10,10 @@ class UpdateUserUseCase {
     private usersRepository: IUsersRepository,
   ) {}
 
-  async execute(
-    id: string,
-    { name, email, cpf, password, company }: IUpdateUserDTO,
-  ) {
-    const emailAlreadyExits = await this.usersRepository.findByEmail(email);
+  async execute(id: string, { name, cpf, password }: IUpdateUserDTO) {
+    const passwordHash = await hash(password, 8);
 
-    if (emailAlreadyExits) {
-      throw new AppError('This email already exists!');
-    }
-
-    const updatedUser = { name, email, cpf, password, company };
+    const updatedUser = { name, cpf, password: passwordHash };
 
     Object.keys(updatedUser).forEach(key =>
       updatedUser[key] === undefined ? delete updatedUser[key] : {},

@@ -2,6 +2,7 @@ import { IUsersRepository } from './IUsersRepository';
 import { Model } from 'mongoose';
 import { IUser, User } from '../entities/User';
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
+import { IUpdateUserDTO } from '../../dtos/IUpdateUserDTO';
 
 class UsersRepository implements IUsersRepository {
   private usersRepository: Model<IUser>;
@@ -47,7 +48,7 @@ class UsersRepository implements IUsersRepository {
     return all;
   }
 
-  async update(id: string, user: ICreateUserDTO): Promise<void> {
+  async update(id: string, user: IUpdateUserDTO): Promise<void> {
     await this.usersRepository.updateOne({ _id: id }, user);
   }
 

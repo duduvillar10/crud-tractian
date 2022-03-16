@@ -18,9 +18,8 @@ class CreateAssetUseCase {
     description,
     model,
     owner,
-    status,
-    health,
     unit,
+    image,
   }: ICreateAssetDTO) {
     const assetNameAlreadyExits = await this.assetsRepository.findByName(name);
 
@@ -39,14 +38,14 @@ class CreateAssetUseCase {
       description,
       model,
       owner,
-      status,
-      health,
       unit,
+      image,
     });
 
     unitExits.assets.push(asset);
 
-    this.unitsRepository.update(unit, unitExits);
+    await this.unitsRepository.update(unit, unitExits);
+
     return asset;
   }
 }

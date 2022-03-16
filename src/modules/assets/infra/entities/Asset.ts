@@ -1,6 +1,14 @@
 import { IUnit, Unit } from '../../../units/infra/entities/Unit';
 import { Schema, model, ObjectId } from 'mongoose';
+
+export enum Status {
+  Running = 'Running',
+  Alerting = 'Alerting',
+  Stopped = 'Stopped',
+}
+
 interface IAsset {
+  _id: string;
   name: string;
 
   description: string;
@@ -9,9 +17,9 @@ interface IAsset {
 
   owner: string;
 
-  status: string;
+  status?: Status;
 
-  health: number;
+  health?: number;
 
   image: string;
 
@@ -21,12 +29,21 @@ interface IAsset {
 const schema = new Schema<IAsset>(
   {
     name: { type: String, required: true },
-    description: { type: String },
-    model: { type: String },
-    owner: { type: String },
-    status: { type: String },
-    health: { type: Number },
-    image: { type: String },
+    description: { type: String, required: true },
+    model: { type: String, required: true },
+    owner: { type: String, required: true },
+    status: {
+      type: String,
+      enum: Status,
+      default: Status.Stopped,
+    },
+    health: {
+      type: Number,
+      min: 0,
+      max: 100,
+      default: 100,
+    },
+    image: { type: String, required: true },
     unit: { type: Schema.Types.ObjectId, ref: 'Unit', required: true },
   },
   { timestamps: true },
