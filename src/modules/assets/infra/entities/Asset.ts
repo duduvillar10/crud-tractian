@@ -1,5 +1,6 @@
 import { IUnit, Unit } from '../../../units/infra/entities/Unit';
 import { Schema, model, ObjectId } from 'mongoose';
+import { deleteFile } from '../../../../utils/file';
 
 export enum Status {
   Running = 'Running',
@@ -54,6 +55,8 @@ schema.pre('deleteOne', async function (next) {
     { $pull: { assets: { $in: [this._conditions._id] } } },
   );
 
+  const asset = await Asset.findOne({ _id: this._conditions._id });
+  deleteFile(`./tmp/assets/${asset.image}`);
   next();
 });
 

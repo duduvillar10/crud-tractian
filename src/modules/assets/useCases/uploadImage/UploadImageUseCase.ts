@@ -17,10 +17,10 @@ class UploadImageUseCase {
 
   async execute({ id, imageName }: IRequest): Promise<void> {
     const asset = await this.assetsRepository.findById(id);
-    console.log(imageName);
+
     if (asset) {
-      deleteFile(`./tmp/assets/${asset.image}`),
-        this.assetsRepository.update(id, { image: imageName });
+      deleteFile(`./tmp/assets/${asset.image}`);
+      this.assetsRepository.update(id, { image: imageName });
     }
   }
 }

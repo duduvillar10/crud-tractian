@@ -21,13 +21,10 @@ const schema = new Schema<ICompany>({
 });
 
 schema.pre('deleteOne', async function (next) {
-  const unit = await Unit.find({ company: this._conditions._id });
-
-  unit.forEach(async unit => await Asset.deleteMany({ unit: unit._id }));
-
-  await Unit.deleteMany({ company: this._conditions._id });
   await User.deleteMany({ company: this._conditions._id });
 
+  const unit = await Unit.find({ company: this._conditions._id });
+  unit.forEach(async unit => await Unit.deleteOne({ _id: unit.id }));
   next();
 });
 

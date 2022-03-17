@@ -31,8 +31,8 @@ schema.pre('deleteOne', async function (next) {
     { $pull: { units: { $in: [this._conditions._id] } } },
   );
 
-  await Asset.deleteMany({ unit: this._conditions._id });
-
+  const assets = await Asset.find({ unit: this._conditions._id });
+  assets.forEach(async asset => await Asset.deleteOne({ _id: asset.id }));
   next();
 });
 
