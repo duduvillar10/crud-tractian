@@ -16,7 +16,7 @@ const schema = new Schema<IUser>(
     email: { type: String, required: true },
     password: { type: String, required: true },
     cpf: { type: String, required: true },
-    isAdmin: { type: Boolean },
+    isAdmin: { type: Boolean, default: false },
     company: { type: Schema.Types.ObjectId, ref: 'Company', required: true },
   },
   { timestamps: true },

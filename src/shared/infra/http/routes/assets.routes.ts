@@ -4,6 +4,7 @@ import { DeleteAssetController } from '../../../../modules/assets/useCases/delet
 import { ListAssetsController } from '../../../../modules/assets/useCases/listAssets/ListAssetsController';
 import { ListAssetsByUnitController } from '../../../../modules/assets/useCases/listAssetsByUnit/ListAssetsByUnitController';
 import { UpdateAssetController } from '../../../../modules/assets/useCases/updateAsset/UpdateAssetController';
+import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 import { validateObjectId } from '../middlewares/validateObjectId';
 
@@ -17,8 +18,6 @@ const deleteAssetController = new DeleteAssetController();
 
 assetsRoutes.use(ensureAuthenticated);
 
-assetsRoutes.post('/', createAssetController.handle);
-
 assetsRoutes.get('/', listAssetsController.handle);
 
 assetsRoutes.get(
@@ -26,6 +25,10 @@ assetsRoutes.get(
   validateObjectId,
   listAssetsByUnitController.handle,
 );
+
+assetsRoutes.use(ensureAdmin);
+
+assetsRoutes.post('/', createAssetController.handle);
 
 assetsRoutes.put('/:id', validateObjectId, updateAssetController.handle);
 

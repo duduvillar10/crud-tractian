@@ -4,6 +4,7 @@ import { DeleteUnitController } from '../../../../modules/units/useCases/deleteU
 import { ListUnitsController } from '../../../../modules/units/useCases/listUnits/ListUnitsController';
 import { ListUnitsByCompanyController } from '../../../../modules/units/useCases/listUnitsByCompany/ListUnitsByCompanyController';
 import { UpdateUnitController } from '../../../../modules/units/useCases/updateUnit/UpdateUnitController';
+import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 import { validateObjectId } from '../middlewares/validateObjectId';
 
@@ -17,8 +18,6 @@ const deleteUnitController = new DeleteUnitController();
 
 unitsRoutes.use(ensureAuthenticated);
 
-unitsRoutes.post('/', createUnitController.handle);
-
 unitsRoutes.get('/', listUnitsController.handle);
 
 unitsRoutes.get(
@@ -26,6 +25,10 @@ unitsRoutes.get(
   validateObjectId,
   listUnitsByCompanyController.handle,
 );
+
+unitsRoutes.use(ensureAdmin);
+
+unitsRoutes.post('/', createUnitController.handle);
 
 unitsRoutes.put('/:id', validateObjectId, updateUnitController.handle);
 
