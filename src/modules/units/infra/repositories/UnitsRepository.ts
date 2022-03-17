@@ -34,7 +34,12 @@ class UnitsRepository implements IUnitsRepository {
   }
 
   async listAll(): Promise<IUnit[]> {
-    const all = await this.unitsRepository.find().populate({ path: 'assets' });
+    const all = await this.unitsRepository.find();
+    return all;
+  }
+
+  async listByCompany(id: string): Promise<IUnit[]> {
+    const all = await this.unitsRepository.find({ company: id });
     return all;
   }
 

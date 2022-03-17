@@ -20,7 +20,7 @@ assetsRoutes.post('/', createAssetController.handle);
 
 assetsRoutes.get('/', listAssetsController.handle);
 
-assetsRoutes.get('/:id', listAssetsByUnitController.handle);
+assetsRoutes.get('/unit/:id', listAssetsByUnitController.handle);
 
 assetsRoutes.put('/:id', updateAssetController.handle);
 

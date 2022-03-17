@@ -42,9 +42,11 @@ class UsersRepository implements IUsersRepository {
   }
 
   async listAll(): Promise<IUser[]> {
-    const all = await this.usersRepository
-      .find()
-      .populate({ path: 'unit', select: '-assets' });
+    const all = await this.usersRepository.find();
+    return all;
+  }
+  async listByCompany(id: string): Promise<IUser[]> {
+    const all = await this.usersRepository.find({ company: id });
     return all;
   }
 

@@ -9,6 +9,7 @@ interface IUnitsRepository {
   findByName(name: string): Promise<IUnit>;
   findById(id: string): Promise<IUnit>;
   listAll(): Promise<IUnit[]>;
+  listByCompany(id: string): Promise<IUnit[]>;
   update(id: string, unit: IUpdateUnitDTO): Promise<void>;
   delete(id: string): Promise<void>;
 }

@@ -31,9 +31,7 @@ class CompaniesRepository {
   }
 
   async listAll(): Promise<ICompany[]> {
-    const all = await this.companiesRepository
-      .find()
-      .populate({ path: 'units', select: '-company' });
+    const all = await this.companiesRepository.find();
     return all;
   }
 

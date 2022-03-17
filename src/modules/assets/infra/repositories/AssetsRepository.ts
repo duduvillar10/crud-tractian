@@ -44,9 +44,7 @@ class AssetsRepository implements IAssetsRepository {
   }
 
   async listAll(): Promise<IAsset[]> {
-    const all = await this.assetsRepository
-      .find()
-      .populate({ path: 'unit', select: '-assets' });
+    const all = await this.assetsRepository.find();
     return all;
   }
 
