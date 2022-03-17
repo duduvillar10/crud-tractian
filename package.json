@@ -37,6 +37,6 @@
   "scripts": {
     "lint": "eslint --fix",
     "dev": "ts-node-dev --poll --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
-    "deploy": "git add . && git commit -m Heroku && git push heroku master"
+    "deploy": "git push heroku master"
   }
 }

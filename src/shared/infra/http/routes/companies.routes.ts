@@ -4,6 +4,7 @@ import { DeleteCompanyController } from '../../../../modules/company/useCases/de
 import { ListCompaniesController } from '../../../../modules/company/useCases/listCompanies/ListCompaniesController';
 import { UpdateCompanyController } from '../../../../modules/company/useCases/updateCompany/UpdateCompanyController';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
+import { validateObjectId } from '../middlewares/validateObjectId';
 
 const companiesRoutes = Router();
 
@@ -18,8 +19,12 @@ companiesRoutes.post('/', createCompanyController.handle);
 
 companiesRoutes.get('/', listCompaniesController.handle);
 
-companiesRoutes.put('/:id', updateCompanyController.handle);
+companiesRoutes.put('/:id', validateObjectId, updateCompanyController.handle);
 
-companiesRoutes.delete('/:id', deleteCompanyController.handle);
+companiesRoutes.delete(
+  '/:id',
+  validateObjectId,
+  deleteCompanyController.handle,
+);
 
 export { companiesRoutes };

@@ -34,7 +34,7 @@ schema.pre('deleteOne', async function (next) {
 schema.pre('save', async function (next) {
   await Company.updateOne(
     { _id: this.company },
-    { $push: { units: this._id } },
+    { $push: { users: this._id } },
   );
 
   next();

@@ -5,6 +5,7 @@ import { ListAssetsController } from '../../../../modules/assets/useCases/listAs
 import { ListAssetsByUnitController } from '../../../../modules/assets/useCases/listAssetsByUnit/ListAssetsByUnitController';
 import { UpdateAssetController } from '../../../../modules/assets/useCases/updateAsset/UpdateAssetController';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
+import { validateObjectId } from '../middlewares/validateObjectId';
 
 const assetsRoutes = Router();
 
@@ -20,10 +21,14 @@ assetsRoutes.post('/', createAssetController.handle);
 
 assetsRoutes.get('/', listAssetsController.handle);
 
-assetsRoutes.get('/unit/:id', listAssetsByUnitController.handle);
+assetsRoutes.get(
+  '/unit/:id',
+  validateObjectId,
+  listAssetsByUnitController.handle,
+);
 
-assetsRoutes.put('/:id', updateAssetController.handle);
+assetsRoutes.put('/:id', validateObjectId, updateAssetController.handle);
 
-assetsRoutes.delete('/:id', deleteAssetController.handle);
+assetsRoutes.delete('/:id', validateObjectId, deleteAssetController.handle);
 
 export { assetsRoutes };

@@ -5,6 +5,7 @@ import { ListUnitsController } from '../../../../modules/units/useCases/listUnit
 import { ListUnitsByCompanyController } from '../../../../modules/units/useCases/listUnitsByCompany/ListUnitsByCompanyController';
 import { UpdateUnitController } from '../../../../modules/units/useCases/updateUnit/UpdateUnitController';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
+import { validateObjectId } from '../middlewares/validateObjectId';
 
 const unitsRoutes = Router();
 
@@ -20,10 +21,14 @@ unitsRoutes.post('/', createUnitController.handle);
 
 unitsRoutes.get('/', listUnitsController.handle);
 
-unitsRoutes.get('/company/:id', listUnitsByCompanyController.handle);
+unitsRoutes.get(
+  '/company/:id',
+  validateObjectId,
+  listUnitsByCompanyController.handle,
+);
 
-unitsRoutes.put('/:id', updateUnitController.handle);
+unitsRoutes.put('/:id', validateObjectId, updateUnitController.handle);
 
-unitsRoutes.delete('/:id', deleteUnitController.handle);
+unitsRoutes.delete('/:id', validateObjectId, deleteUnitController.handle);
 
 export { unitsRoutes };
