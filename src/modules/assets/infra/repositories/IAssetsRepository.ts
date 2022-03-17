@@ -6,6 +6,7 @@ interface IAssetsRepository {
   create(data: ICreateAssetDTO): Promise<IAsset>;
   findByName(name: string): Promise<IAsset>;
   findById(id: string): Promise<IAsset>;
+  listByUnitId(id: string): Promise<IAsset[]>;
   listAll(): Promise<IAsset[]>;
   update(id: string, asset: IUpdateAssetDTO): Promise<void>;
   delete(id: string): Promise<void>;

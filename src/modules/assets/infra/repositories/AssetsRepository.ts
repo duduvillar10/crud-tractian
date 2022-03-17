@@ -50,6 +50,11 @@ class AssetsRepository implements IAssetsRepository {
     return all;
   }
 
+  async listByUnitId(id: string): Promise<IAsset[]> {
+    const all = await this.assetsRepository.find({ unit: id });
+    return all;
+  }
+
   async update(id: string, asset: IUpdateAssetDTO): Promise<void> {
     await this.assetsRepository.updateOne({ _id: id }, asset, {
       upsert: true,
