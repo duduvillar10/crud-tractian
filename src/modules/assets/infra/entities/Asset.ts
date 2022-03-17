@@ -51,8 +51,14 @@ const schema = new Schema<IAsset>(
 schema.pre('deleteOne', async function (next) {
   await Unit.updateOne(
     { assets: { $in: [this._conditions._id] } },
-    { $pull: { assets: { _id: this._conditions._id } } },
+    { $pull: { assets: { $in: [this._conditions._id] } } },
   );
+
+  next();
+});
+
+schema.pre('save', async function (next) {
+  await Unit.updateOne({ _id: this.unit }, { $push: { assets: this._id } });
 
   next();
 });

@@ -25,7 +25,16 @@ const schema = new Schema<IUser>(
 schema.pre('deleteOne', async function (next) {
   await Company.updateOne(
     { users: { $in: [this._conditions._id] } },
-    { $pull: { users: { _id: this._conditions._id } } },
+    { $pull: { users: { $in: [this._conditions._id] } } },
+  );
+
+  next();
+});
+
+schema.pre('save', async function (next) {
+  await Company.updateOne(
+    { _id: this.company },
+    { $push: { units: this._id } },
   );
 
   next();
