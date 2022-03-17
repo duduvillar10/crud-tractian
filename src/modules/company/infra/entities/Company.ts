@@ -1,7 +1,7 @@
 import { IUnit, Unit } from '../../../units/infra/entities/Unit';
 import { Schema, model } from 'mongoose';
 import { Asset } from '../../../assets/infra/entities/Asset';
-import { IUser } from '../../../users/infra/entities/User';
+import { IUser, User } from '../../../users/infra/entities/User';
 
 interface ICompany {
   name: string;
@@ -26,6 +26,7 @@ schema.pre('deleteOne', async function (next) {
   unit.forEach(async unit => await Asset.deleteMany({ unit: unit._id }));
 
   await Unit.deleteMany({ company: this._conditions._id });
+  await User.deleteMany({ company: this._conditions._id });
 
   next();
 });
