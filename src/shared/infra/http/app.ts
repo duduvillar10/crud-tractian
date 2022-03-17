@@ -11,6 +11,7 @@ createConnection();
 
 const app = express();
 
+app.use(express.static('/tmp/assets'));
 app.use(express.json());
 
 app.use(router);
