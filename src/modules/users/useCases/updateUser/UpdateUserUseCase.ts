@@ -11,10 +11,9 @@ class UpdateUserUseCase {
   ) {}
 
   async execute(id: string, { name, cpf, password }: IUpdateUserDTO) {
-    const passwordHash = await hash(password, 8);
+    const passwordHash = password ? await hash(password, 8) : undefined;
 
     const updatedUser = { name, cpf, password: passwordHash };
-
     Object.keys(updatedUser).forEach(key =>
       updatedUser[key] === undefined ? delete updatedUser[key] : {},
     );

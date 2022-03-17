@@ -2,7 +2,6 @@ import { Company, ICompany } from '../../../company/infra/entities/Company';
 import { Schema, model } from 'mongoose';
 
 interface IUser {
-  id: string;
   name: string;
   email: string;
   password: string;

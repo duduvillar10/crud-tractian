@@ -8,7 +8,6 @@ export enum Status {
 }
 
 interface IAsset {
-  _id: string;
   name: string;
 
   description: string;
