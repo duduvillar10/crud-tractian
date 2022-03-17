@@ -14,7 +14,6 @@ class CreateAssetController {
       model,
       owner,
       unit,
-      image,
     });
 
     return response.status(201).json(asset);

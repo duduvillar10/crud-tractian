@@ -13,14 +13,7 @@ class CreateAssetUseCase {
     private unitsRepository: IUnitsRepository,
   ) {}
 
-  async execute({
-    name,
-    description,
-    model,
-    owner,
-    unit,
-    image,
-  }: ICreateAssetDTO) {
+  async execute({ name, description, model, owner, unit }: ICreateAssetDTO) {
     const assetNameAlreadyExits = await this.assetsRepository.findByName(name);
 
     if (assetNameAlreadyExits) {
@@ -39,7 +32,6 @@ class CreateAssetUseCase {
       model,
       owner,
       unit,
-      image,
     });
 
     return asset;
