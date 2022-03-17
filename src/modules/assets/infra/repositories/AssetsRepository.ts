@@ -17,7 +17,6 @@ class AssetsRepository implements IAssetsRepository {
     model,
     owner,
     unit,
-    image,
   }: ICreateAssetDTO): Promise<IAsset> {
     const asset = new this.assetsRepository({
       name,
@@ -25,7 +24,6 @@ class AssetsRepository implements IAssetsRepository {
       model,
       owner,
       unit,
-      image,
     });
 
     await asset.save();

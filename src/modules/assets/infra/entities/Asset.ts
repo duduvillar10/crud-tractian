@@ -20,7 +20,7 @@ interface IAsset {
 
   health?: number;
 
-  image: string;
+  image?: string;
 
   unit: IUnit;
 }
@@ -42,7 +42,7 @@ const schema = new Schema<IAsset>(
       max: 100,
       default: 100,
     },
-    image: { type: String, required: true },
+    image: { type: String },
     unit: { type: Schema.Types.ObjectId, ref: 'Unit', required: true },
   },
   { timestamps: true },

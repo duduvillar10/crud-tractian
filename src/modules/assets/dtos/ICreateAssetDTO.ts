@@ -6,6 +6,5 @@ interface ICreateAssetDTO {
   model: string;
   owner: string;
   unit: string;
-  image: string;
 }
 export { ICreateAssetDTO };
