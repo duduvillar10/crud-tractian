@@ -3,7 +3,7 @@ import { ListAssetsByUnitUseCase } from './ListAssetsByUnitUseCase';
 
 import { container } from 'tsyringe';
 
-class ListAssetsController {
+class ListAssetsByUnitController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const listAssetsByUnitUseCase = container.resolve(ListAssetsByUnitUseCase);
@@ -14,4 +14,4 @@ class ListAssetsController {
   }
 }
 
-export { ListAssetsController };
+export { ListAssetsByUnitController };
