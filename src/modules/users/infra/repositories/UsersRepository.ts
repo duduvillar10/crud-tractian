@@ -46,7 +46,10 @@ class UsersRepository implements IUsersRepository {
     return all;
   }
   async listByCompany(id: string): Promise<IUser[]> {
-    const all = await this.usersRepository.find({ company: id });
+    const all = await this.usersRepository.find(
+      { company: id },
+      { password: 0 },
+    );
     return all;
   }
 

@@ -14,7 +14,7 @@ class ListUnitsByCompanyUseCase {
   ) {}
 
   async execute(id: string): Promise<IUnit[]> {
-    const companyExits = this.companiesRepository.findById(id);
+    const companyExits = await this.companiesRepository.findById(id);
 
     if (!companyExits) {
       throw new AppError("This company doesn't exits!");

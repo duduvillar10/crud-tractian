@@ -14,9 +14,9 @@ class ListAssetsByUnitUseCase {
   ) {}
 
   async execute(id: string): Promise<IAsset[]> {
-    const unitExits = this.unitsRepository.findById(id);
+    const unitExits = await this.unitsRepository.findById(id);
 
-    if (unitExits) {
+    if (!unitExits) {
       throw new AppError("This unit doesn't exits!");
     }
 
