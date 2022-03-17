@@ -1,1 +1,1 @@
-web: ts-node-dev --poll --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts
+web: yarn dev
