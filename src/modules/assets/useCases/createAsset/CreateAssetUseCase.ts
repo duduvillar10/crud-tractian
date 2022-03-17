@@ -42,10 +42,6 @@ class CreateAssetUseCase {
       image,
     });
 
-    unitExits.assets.push(asset);
-
-    await this.unitsRepository.update(unit, unitExits);
-
     return asset;
   }
 }

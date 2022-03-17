@@ -29,17 +29,13 @@ class CreateUserUseCase {
 
     const passwordHash = await hash(password, 8);
 
-    const user = await this.usersRepository.create({
+    await this.usersRepository.create({
       name,
       email,
       password: passwordHash,
       cpf,
       company,
     });
-
-    companyExits.users.push(user);
-
-    await this.companiesRepository.update(company, companyExits);
   }
 }
 

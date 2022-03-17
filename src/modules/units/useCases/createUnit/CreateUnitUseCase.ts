@@ -32,10 +32,6 @@ class CreateUnitUseCase {
       company,
     });
 
-    companyExits.units.push(unit);
-
-    this.companiesRepository.update(company, companyExits);
-
     return unit;
   }
 }
