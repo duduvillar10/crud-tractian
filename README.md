@@ -58,8 +58,26 @@ This project was developed following this technologies:
 - JWT
 - bcrypt
 
+# :information_source: How to use
+
+```bash
+# Clone this repo
+$ git clone https://github.com/duduvillar10/crud-tractian.git
+
+# Access the folder
+$ cd crud-tractian
+
+# Install dependencies
+$ yarn install
+
+# Run app
+$ yarn dev
+```
+
 # 📖 Documentation
 
 Heroku
 
 https://immense-everglades-47956.herokuapp.com/api-docs/
+
+Made with 💙 by José Eduardo :wave: [Contact me!](https://www.linkedin.com/in/jos%C3%A9-eduardo-vilar/)
