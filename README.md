@@ -6,6 +6,11 @@
 "Not knowing is no reason not to do it, on the contrary. It is the first step
 to expand your skills" - Bruno Felix, CTO of TRACTIAN.
 
+<p align="center" style="display: flex; flex-direction: column; align-items: center; justify-content:center;">
+  <img alt="Web Gif" src=".github/unknown_2022.03.18-16.42-_online-video-cutter.com_.gif" width="600px">
+  <img alt="Web Gif" src=".github/unknown_2022.03.18-17.00-_online-video-cutter.com_" width="600px">
+</p>
+
 ## 🔥 Challenge 
 
 #### Imagine the following situation:
