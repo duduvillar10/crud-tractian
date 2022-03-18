@@ -5,6 +5,7 @@ import { GetUnitController } from '../../../../modules/units/useCases/getUnit/Ge
 import { ListUnitsController } from '../../../../modules/units/useCases/listUnits/ListUnitsController';
 import { ListUnitsByCompanyController } from '../../../../modules/units/useCases/listUnitsByCompany/ListUnitsByCompanyController';
 import { UpdateUnitController } from '../../../../modules/units/useCases/updateUnit/UpdateUnitController';
+import cache from '../middlewares/cache';
 import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 import { validateObjectId } from '../middlewares/validateObjectId';
@@ -20,7 +21,7 @@ const getUnitController = new GetUnitController();
 
 unitsRoutes.use(ensureAuthenticated);
 
-unitsRoutes.get('/', listUnitsController.handle);
+unitsRoutes.get('/', cache, listUnitsController.handle);
 
 unitsRoutes.get('/:id', validateObjectId, getUnitController.handle);
 

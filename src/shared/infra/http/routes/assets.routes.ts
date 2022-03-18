@@ -8,6 +8,7 @@ import { ListAssetsController } from '../../../../modules/assets/useCases/listAs
 import { ListAssetsByUnitController } from '../../../../modules/assets/useCases/listAssetsByUnit/ListAssetsByUnitController';
 import { UpdateAssetController } from '../../../../modules/assets/useCases/updateAsset/UpdateAssetController';
 import { UploadImageController } from '../../../../modules/assets/useCases/uploadImage/UploadImageController';
+import cache from '../middlewares/cache';
 import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 import { validateObjectId } from '../middlewares/validateObjectId';
@@ -26,7 +27,7 @@ const getAssetController = new GetAssetController();
 
 assetsRoutes.use(ensureAuthenticated);
 
-assetsRoutes.get('/', listAssetsController.handle);
+assetsRoutes.get('/', cache, listAssetsController.handle);
 
 assetsRoutes.get('/:id', validateObjectId, getAssetController.handle);
 

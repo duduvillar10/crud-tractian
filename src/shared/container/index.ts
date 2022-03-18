@@ -1,3 +1,4 @@
+import NodeCache from 'node-cache';
 import { container } from 'tsyringe';
 import { AssetsRepository } from '../../modules/assets/infra/repositories/AssetsRepository';
 import { IAssetsRepository } from '../../modules/assets/infra/repositories/IAssetsRepository';
@@ -7,6 +8,8 @@ import { ICompaniesRepository } from '../../modules/company/infra/repositories/I
 import { CompaniesRepository } from '../../modules/company/infra/repositories/CompaniesRepository';
 import { IUsersRepository } from '../../modules/users/infra/repositories/IUsersRepository';
 import { UsersRepository } from '../../modules/users/infra/repositories/UsersRepository';
+
+container.registerSingleton<NodeCache>('NodeCache', NodeCache);
 
 container.registerSingleton<IAssetsRepository>(
   'AssetsRepository',

@@ -1,3 +1,4 @@
+import NodeCache from 'node-cache';
 import { inject, injectable } from 'tsyringe';
 import { IUnit } from '../../infra/entities/Unit';
 import { IUnitsRepository } from '../../infra/repositories/IUnitsRepository';
@@ -7,10 +8,14 @@ class ListUnitsUseCase {
   constructor(
     @inject('UnitsRepository')
     private unitsRepository: IUnitsRepository,
+    @inject('NodeCache')
+    private nodeCache: NodeCache,
   ) {}
 
   async execute(): Promise<IUnit[]> {
-    return await this.unitsRepository.listAll();
+    const all = await this.unitsRepository.listAll();
+    this.nodeCache.set('/companies', all, 3);
+    return all;
   }
 }
 

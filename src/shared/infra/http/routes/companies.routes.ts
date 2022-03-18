@@ -4,6 +4,7 @@ import { DeleteCompanyController } from '../../../../modules/company/useCases/de
 import { GetCompanyController } from '../../../../modules/company/useCases/getCompany/GetCompanyController';
 import { ListCompaniesController } from '../../../../modules/company/useCases/listCompanies/ListCompaniesController';
 import { UpdateCompanyController } from '../../../../modules/company/useCases/updateCompany/UpdateCompanyController';
+import cache from '../middlewares/cache';
 import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 import { validateObjectId } from '../middlewares/validateObjectId';
@@ -18,7 +19,7 @@ const getCompanyController = new GetCompanyController();
 
 companiesRoutes.use(ensureAuthenticated);
 
-companiesRoutes.get('/', listCompaniesController.handle);
+companiesRoutes.get('/', cache, listCompaniesController.handle);
 
 companiesRoutes.get('/:id', validateObjectId, getCompanyController.handle);
 
