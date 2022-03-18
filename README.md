@@ -1,4 +1,8 @@
-# Challenge: TRACTIAN Back-End Software Engineer 
+<div align="center">
+  <img src="https://imgix.tractian.com/images/Logo-Tractian.svg?auto=format&fit=max&w=256" height="40px">
+  <h2 align="center">Backend API</h2>
+</div>
+<h1 align="center"> TRACTIAN Back-End Software Engineer </h1> 
 
 ## Imagine the following situation:
 
