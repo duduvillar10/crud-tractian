@@ -1,10 +1,11 @@
 <div align="center">
   <img src="https://imgix.tractian.com/images/Logo-Tractian.svg?auto=format&fit=max&w=256" height="40px">
   <h2 align="center">Back-End Software Engineer</h2>
+  <h3 align="center">"Not knowing is no reason not to do it, on the contrary. It is the first step
+to expand your skills" - Bruno Felix, CTO of TRACTIAN.</h3>
 </div>
 
-"Not knowing is no reason not to do it, on the contrary. It is the first step
-to expand your skills" - Bruno Felix, CTO of TRACTIAN.
+
 
 <p align="center" style="display: flex; flex-direction: column; align-items: center; justify-content:center;">
   <img alt="Web Gif" src=".github/unknown_2022.03.18-16.42-_online-video-cutter.com_.gif" width="600px">
