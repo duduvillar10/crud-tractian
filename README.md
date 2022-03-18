@@ -3,7 +3,7 @@
   <h2 align="center">Back-End Software Engineer</h2>
   "Not knowing is no reason not to do it, on the contrary. It is the first step
 to expand your skills" - Bruno Felix, CTO of TRACTIAN.
-</div>
+</div><br>
 
 
 
