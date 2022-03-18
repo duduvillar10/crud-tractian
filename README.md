@@ -53,6 +53,10 @@ This project was developed following this technologies:
 - Swagger
 - Multer
 - MongoDB
+- NodeCache
+- Tsyringe
+- JWT
+- bcrypt
 
 # 📖 Documentation
 
