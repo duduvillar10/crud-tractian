@@ -11,12 +11,12 @@ class CreateCompanyUseCase {
   ) {}
 
   async execute({ name, description }: ICreateCompanyDTO) {
-    const companyNameAlreadyExits = await this.companiesRepository.findByName(
+    const companyNameAlreadyExists = await this.companiesRepository.findByName(
       name,
     );
 
-    if (companyNameAlreadyExits) {
-      throw new AppError('This name already exists!');
+    if (companyNameAlreadyExists) {
+      throw new AppError('This name already exists!', 400);
     }
 
     const company = await this.companiesRepository.create({

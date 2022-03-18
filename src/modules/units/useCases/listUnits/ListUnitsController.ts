@@ -9,7 +9,7 @@ class ListUnitsController {
 
     const units = await listUnitsUseCase.execute();
 
-    return response.json(units);
+    return response.status(200).json(units);
   }
 }
 

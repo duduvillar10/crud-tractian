@@ -11,9 +11,9 @@ class DeleteAssetUseCase {
   ) {}
 
   async execute(id: string): Promise<void> {
-    const assetExits = await this.assetsRepository.findById(id);
+    const assetExists = await this.assetsRepository.findById(id);
 
-    if (!assetExits) {
+    if (!assetExists) {
       throw new AppError("This asset doesn't exists!", 404);
     }
 

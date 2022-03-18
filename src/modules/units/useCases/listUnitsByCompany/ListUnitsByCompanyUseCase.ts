@@ -14,10 +14,10 @@ class ListUnitsByCompanyUseCase {
   ) {}
 
   async execute(id: string): Promise<IUnit[]> {
-    const companyExits = await this.companiesRepository.findById(id);
+    const companyExists = await this.companiesRepository.findById(id);
 
-    if (!companyExits) {
-      throw new AppError("This company doesn't exits!");
+    if (!companyExists) {
+      throw new AppError("This company doesn't exists!", 404);
     }
 
     return await this.unitsRepository.listByCompany(id);

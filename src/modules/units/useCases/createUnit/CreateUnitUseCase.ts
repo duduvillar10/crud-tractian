@@ -14,16 +14,16 @@ class CreateUnitUseCase {
   ) {}
 
   async execute({ name, description, company }: ICreateUnitDTO) {
-    const unitNameAlreadyExits = await this.unitsRepository.findByName(name);
+    const unitNameAlreadyExists = await this.unitsRepository.findByName(name);
 
-    if (unitNameAlreadyExits) {
-      throw new AppError('This name already exists!');
+    if (unitNameAlreadyExists) {
+      throw new AppError('This name already exists!', 400);
     }
 
-    const companyExits = await this.companiesRepository.findById(company);
+    const companyExists = await this.companiesRepository.findById(company);
 
-    if (!companyExits) {
-      throw new AppError("This company doesn't exists!");
+    if (!companyExists) {
+      throw new AppError("This company doesn't exists!", 404);
     }
 
     const unit = await this.unitsRepository.create({

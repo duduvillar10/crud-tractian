@@ -11,16 +11,16 @@ class UpdateUnitUseCase {
   ) {}
 
   async execute(id: string, { name, description }: IUpdateUnitDTO) {
-    const unitExits = await this.unitsRepository.findById(id);
+    const unitExists = await this.unitsRepository.findById(id);
 
-    if (!unitExits) {
+    if (!unitExists) {
       throw new AppError("This unit doesn't exists!", 404);
     }
 
-    const unitNameAlreadyExits = await this.unitsRepository.findByName(name);
+    const unitNameAlreadyExists = await this.unitsRepository.findByName(name);
 
-    if (unitNameAlreadyExits) {
-      throw new AppError('This name already exists!');
+    if (unitNameAlreadyExists) {
+      throw new AppError('This name already exists!', 400);
     }
 
     const updatedUnit = {
@@ -34,7 +34,7 @@ class UpdateUnitUseCase {
     try {
       await this.unitsRepository.update(id, updatedUnit);
     } catch {
-      throw new AppError('Invalid inputs!');
+      throw new AppError('Invalid inputs!', 403);
     }
   }
 }

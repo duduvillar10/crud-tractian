@@ -10,8 +10,8 @@ class DeleteUnitUseCase {
   ) {}
 
   async execute(id: string): Promise<void> {
-    const unitExits = await this.unitsRepository.findById(id);
-    if (!unitExits) {
+    const unitExists = await this.unitsRepository.findById(id);
+    if (!unitExists) {
       throw new AppError("This unit doesn't exists!", 404);
     }
 

@@ -10,9 +10,9 @@ class DeleteCompanyUseCase {
   ) {}
 
   async execute(id: string): Promise<void> {
-    const companyExits = await this.companiesRepository.findById(id);
+    const companyExists = await this.companiesRepository.findById(id);
 
-    if (!companyExits) {
+    if (!companyExists) {
       throw new AppError("This company doesn't exists!", 404);
     }
 

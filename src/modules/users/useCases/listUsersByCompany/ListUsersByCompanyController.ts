@@ -13,7 +13,7 @@ class ListUsersByCompanyController {
 
     const units = await listUsersByCompanyUseCase.execute(id);
 
-    return response.json(units);
+    return response.status(200).json(units);
   }
 }
 

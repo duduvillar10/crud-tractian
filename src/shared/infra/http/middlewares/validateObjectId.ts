@@ -12,7 +12,7 @@ export async function validateObjectId(
   const isValid = isValidObjectId(id);
 
   if (!isValid) {
-    throw new AppError('Invalid id!');
+    throw new AppError('Invalid id!', 403);
   }
 
   next();

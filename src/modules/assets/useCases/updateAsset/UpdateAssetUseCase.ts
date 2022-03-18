@@ -15,16 +15,16 @@ class UpdateAssetUseCase {
     id: string,
     { name, description, model, owner, status, health, image }: IUpdateAssetDTO,
   ) {
-    const assetExits = await this.assetsRepository.findById(id);
+    const assetExists = await this.assetsRepository.findById(id);
 
-    if (!assetExits) {
+    if (!assetExists) {
       throw new AppError("This asset doesn't exists!", 404);
     }
 
-    const assetNameAlreadyExits = await this.assetsRepository.findByName(name);
+    const assetNameAlreadyExists = await this.assetsRepository.findByName(name);
 
-    if (assetNameAlreadyExits) {
-      throw new AppError('This name already exists!');
+    if (assetNameAlreadyExists) {
+      throw new AppError('This name already exists!', 400);
     }
 
     const updatedAsset = {
@@ -44,7 +44,7 @@ class UpdateAssetUseCase {
     try {
       await this.assetsRepository.update(id, updatedAsset);
     } catch {
-      throw new AppError('Invalid inputs!!');
+      throw new AppError('Invalid inputs!!', 403);
     }
   }
 }

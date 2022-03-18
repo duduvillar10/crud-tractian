@@ -9,7 +9,7 @@ class ListCompaniesController {
 
     const companies = await listCompaniesUseCase.execute();
 
-    return response.json(companies);
+    return response.status(200).json(companies);
   }
 }
 

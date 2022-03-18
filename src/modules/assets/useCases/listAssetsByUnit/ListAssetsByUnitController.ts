@@ -11,7 +11,7 @@ class ListAssetsByUnitController {
 
     const assets = await listAssetsByUnitUseCase.execute(id);
 
-    return response.json(assets);
+    return response.status(200).json(assets);
   }
 }
 

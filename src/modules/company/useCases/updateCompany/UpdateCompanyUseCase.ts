@@ -11,18 +11,18 @@ class UpdateCompanyUseCase {
   ) {}
 
   async execute(id: string, { name, description }: ICreateCompanyDTO) {
-    const companyExits = await this.companiesRepository.findById(id);
+    const companyExists = await this.companiesRepository.findById(id);
 
-    if (!companyExits) {
+    if (!companyExists) {
       throw new AppError("This company doesn't exists!", 404);
     }
 
-    const companyNameAlreadyExits = await this.companiesRepository.findByName(
+    const companyNameAlreadyExists = await this.companiesRepository.findByName(
       name,
     );
 
-    if (companyNameAlreadyExits) {
-      throw new AppError('This name already exists!');
+    if (companyNameAlreadyExists) {
+      throw new AppError('This name already exists!', 400);
     }
 
     const updatedCompany = {
@@ -36,7 +36,7 @@ class UpdateCompanyUseCase {
     try {
       await this.companiesRepository.update(id, updatedCompany);
     } catch {
-      throw new AppError('Invalid inputs');
+      throw new AppError('Invalid inputs', 403);
     }
   }
 }

@@ -10,7 +10,7 @@ class DeleteUserController {
 
     await celeteUserUseCase.execute(id);
 
-    return response.status(201).send();
+    return response.status(204).send();
   }
 }
 export { DeleteUserController };

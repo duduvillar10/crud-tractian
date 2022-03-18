@@ -14,16 +14,16 @@ class CreateAssetUseCase {
   ) {}
 
   async execute({ name, description, model, owner, unit }: ICreateAssetDTO) {
-    const assetNameAlreadyExits = await this.assetsRepository.findByName(name);
+    const assetNameAlreadyExists = await this.assetsRepository.findByName(name);
 
-    if (assetNameAlreadyExits) {
-      throw new AppError('This name already exists!');
+    if (assetNameAlreadyExists) {
+      throw new AppError('This name already exists!', 400);
     }
 
-    const unitExits = await this.unitsRepository.findById(unit);
+    const unitExists = await this.unitsRepository.findById(unit);
 
-    if (!unitExits) {
-      throw new AppError("This unit doesn't exists!");
+    if (!unitExists) {
+      throw new AppError("This unit doesn't exists!", 404);
     }
 
     const asset = await this.assetsRepository.create({

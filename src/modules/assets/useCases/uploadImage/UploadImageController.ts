@@ -15,7 +15,7 @@ class UploadImageController {
 
     await uploadImageUseCase.execute({ id, imageName: filename });
 
-    return response.status(201).send();
+    return response.status(204).send();
   }
 }
 

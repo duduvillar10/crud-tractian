@@ -9,7 +9,7 @@ class ListAssetsController {
 
     const assets = await listAssetsUseCase.execute();
 
-    return response.json(assets);
+    return response.status(200).json(assets);
   }
 }
 

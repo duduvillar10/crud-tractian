@@ -9,7 +9,7 @@ class DeleteUnitController {
 
     await deleteUnitUseCase.execute(id);
 
-    return response.status(200).send();
+    return response.status(204).send();
   }
 }
 

@@ -15,7 +15,7 @@ class UpdateUserUseCase {
     const user = await this.usersRepository.findById(id);
 
     if (user.isAdmin) {
-      throw new AppError('Invalid operation');
+      throw new AppError('Invalid operation', 403);
     }
 
     const passwordHash = password ? await hash(password, 8) : undefined;

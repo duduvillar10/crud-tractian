@@ -15,16 +15,16 @@ class CreateUserUseCase {
   ) {}
 
   async execute({ name, email, password, cpf, company }: ICreateUserDTO) {
-    const emailAlreadyExits = await this.usersRepository.findByEmail(email);
+    const emailAlreadyExists = await this.usersRepository.findByEmail(email);
 
-    if (emailAlreadyExits) {
-      throw new AppError('User already exists!');
+    if (emailAlreadyExists) {
+      throw new AppError('User already exists!', 400);
     }
 
-    const companyExits = await this.companiesRepository.findById(company);
+    const companyExists = await this.companiesRepository.findById(company);
 
-    if (!companyExits) {
-      throw new AppError("This company doesn't exists!");
+    if (!companyExists) {
+      throw new AppError("This company doesn't exists!", 404);
     }
 
     const passwordHash = await hash(password, 8);
