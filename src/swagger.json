@@ -5,7 +5,7 @@
     "description": "This is an API Rent",
     "version": "1.0.0",
     "contact": {
-      "email": "duduvillar10io@hotmail.com"
+      "email": "duduvillar10io@gmail.com"
     }
   },
   "components": {
@@ -115,8 +115,12 @@
                 }
               },
               "example": {
-                "name": "Company name sample",
-                "description": "Caompany description sample"
+                "name": "Name",
+                "description": "Description",
+                "email": "email@email.com",
+                "password": 12345,
+                "cpf": 123456789,
+                "company": "Company id"
               }
             }
           }
@@ -254,11 +258,70 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "This company doesn't exists"
           }
         }
       }
     },
     "/users/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get an user",
+        "description": "Get an user",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "User id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "cpf": {
+                      "type": "string"
+                    },
+                    "isAdmin": {
+                      "type": "string"
+                    },
+                    "company": {
+                      "type": "string"
+                    },
+                    "__v": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This user doesn't exists"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "User"
@@ -402,6 +465,62 @@
       }
     },
     "/units/{id}": {
+      "get": {
+        "tags": [
+          "Unit"
+        ],
+        "summary": "Get an Unit",
+        "description": "Get an Unit",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Unit id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "company": {
+                      "type": "string"
+                    },
+                    "assets": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "_id": {
+                      "type": "string"
+                    },
+                    "__v": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This user doesn't exists"
+          }
+        }
+      },
       "put": {
         "tags": [
           "Unit"
@@ -512,13 +631,10 @@
                       "description": {
                         "type": "string"
                       },
-                      "model": {
+                      "company": {
                         "type": "string"
                       },
-                      "owner": {
-                        "type": "string"
-                      },
-                      "unit": {
+                      "assets": {
                         "type": "string"
                       },
                       "__v": {
@@ -655,6 +771,65 @@
       }
     },
     "/companies/{id}": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "Get a company",
+        "description": "Get company",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Unit id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "units": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "users": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "_id": {
+                      "type": "string"
+                    },
+                    "__v": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This company doesn't exists"
+          }
+        }
+      },
       "put": {
         "tags": [
           "Company"
@@ -753,6 +928,18 @@
                   },
                   "unit": {
                     "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "health": {
+                    "type": "number"
+                  },
+                  "_id": {
+                    "type": "string"
+                  },
+                  "__v": {
+                    "type": "string"
                   }
                 }
               },
@@ -780,17 +967,20 @@
                     "description": {
                       "type": "string"
                     },
-                    "units": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
+                    "model": {
+                      "type": "string"
                     },
-                    "users": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
+                    "owner": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "health": {
+                      "type": "number"
                     },
                     "_id": {
                       "type": "string"
@@ -841,6 +1031,12 @@
                       "unit": {
                         "type": "string"
                       },
+                      "status": {
+                        "type": "string"
+                      },
+                      "health": {
+                        "type": "number"
+                      },
                       "__v": {
                         "type": "string"
                       }
@@ -854,6 +1050,68 @@
       }
     },
     "/assets/{id}": {
+      "get": {
+        "tags": [
+          "Asset"
+        ],
+        "summary": "Get an Asset",
+        "description": "Get an Asset",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Asset id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "model": {
+                      "type": "string"
+                    },
+                    "owner": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "health": {
+                      "type": "number"
+                    },
+                    "__v": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This company doesn't exists"
+          }
+        }
+      },
       "put": {
         "tags": [
           "Asset"
@@ -1032,6 +1290,12 @@
                       "unit": {
                         "type": "string"
                       },
+                      "status": {
+                        "type": "string"
+                      },
+                      "health": {
+                        "type": "number"
+                      },
                       "__v": {
                         "type": "string"
                       }
@@ -1040,6 +1304,9 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "This unit doesn't exists"
           }
         }
       }
