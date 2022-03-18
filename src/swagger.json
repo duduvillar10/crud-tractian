@@ -159,9 +159,49 @@
             "description": "Company doesn't exists"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update an user",
+        "description": "Update a logged user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "cpf": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "name": "name sample",
+                "password": "description sample",
+                "cpf": "cpf sample"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "This user doesn't exits"
+          }
+        }
       }
     },
-    "/users/{id}": {
+    "/users/company/{id}": {
       "get": {
         "tags": [
           "User"
@@ -214,6 +254,284 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete a user",
+        "description": "Delete a user",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "user Id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "User doesn't exits"
+          }
+        }
+      }
+    },
+    "/units": {
+      "post": {
+        "tags": [
+          "Unit"
+        ],
+        "summary": "Create an Unit",
+        "description": "Create a new unit",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "company": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "name": "Company name sample",
+                "description": "Caompany description sample"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "company": {
+                      "type": "string"
+                    },
+                    "assets": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "_id": {
+                      "type": "string"
+                    },
+                    "__v": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unit already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Unit"
+        ],
+        "summary": "List all units",
+        "description": "List all units",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "_id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "company": {
+                        "type": "string"
+                      },
+                      "assets": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "__v": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/units/{id}": {
+      "put": {
+        "tags": [
+          "Unit"
+        ],
+        "summary": "Update an Unit",
+        "description": "Update a unit",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "unit id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "name": "Unit name sample",
+                "description": "Unit description sample"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "This unit doesn't exists"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Unit"
+        ],
+        "summary": "Delete an unit",
+        "description": "Delete an company",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "unit id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "This unit doesn't exists"
+          }
+        }
+      }
+    },
+    "/units/company/{id}": {
+      "get": {
+        "tags": [
+          "Unit"
+        ],
+        "summary": "List units by company",
+        "description": "List unit by company",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "unit Id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "_id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "model": {
+                        "type": "string"
+                      },
+                      "owner": {
+                        "type": "string"
+                      },
+                      "unit": {
+                        "type": "string"
+                      },
+                      "__v": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "This unit doesn't exists"
           }
         }
       }
@@ -370,7 +688,7 @@
               },
               "example": {
                 "name": "Company name sample",
-                "description": "Caompany description sample"
+                "description": "Company description sample"
               }
             }
           }
@@ -380,7 +698,7 @@
             "description": "Ok"
           },
           "400": {
-            "description": "This company  exists"
+            "description": "This company doesn't exists"
           }
         }
       },
@@ -640,6 +958,34 @@
           }
         }
       },
+      "delete": {
+        "tags": [
+          "Asset"
+        ],
+        "summary": "Delete an Asset",
+        "description": "Delete an Asset",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Company id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid id"
+          }
+        }
+      }
+    },
+    "/assets/unit/{id}": {
       "get": {
         "tags": [
           "Asset"
@@ -692,32 +1038,6 @@
                 }
               }
             }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Asset"
-        ],
-        "summary": "Delete an Asset",
-        "description": "Delete an Asset",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "Company id",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "Invalid id"
           }
         }
       }
