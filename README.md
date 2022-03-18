@@ -6,7 +6,7 @@
 "Not knowing is no reason not to do it, on the contrary. It is the first step
 to expand your skills" - Bruno Felix, CTO of TRACTIAN.
 
-<h2 align="center">Challenge</h2>
+## Challenge 
 
 ### Build a CRUD where the user can register companies, units, assets and users.
 
@@ -18,7 +18,7 @@ Every user is part of a company;
 There are three types of status: Running, Alerting, Stopped;
 Health level needs to be between 0% to 100%.
 
-<h2 align="center">Implementation</h2>
+## Implementation
 
 ### ✔️ Techs
 
