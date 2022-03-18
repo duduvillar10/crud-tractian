@@ -6,7 +6,7 @@
 "Not knowing is no reason not to do it, on the contrary. It is the first step
 to expand your skills" - Bruno Felix, CTO of TRACTIAN.
 
-## Challenge 
+## 🖥️ Challenge 
 
 #### Imagine the following situation:
 
@@ -35,7 +35,7 @@ Our users, Emerson and Roberta, are maintenance managers at Industria Freios Sup
 
 ## Implementation
 
-### ✔️ Techs
+### 🚀 Techs
 
 This project was developed following this technologies:
 
