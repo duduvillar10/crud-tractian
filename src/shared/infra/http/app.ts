@@ -1,19 +1,25 @@
 import 'reflect-metadata';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
-import createConnection from '../mongoose';
-import { router } from './routes';
+import swaggerUi from 'swagger-ui-express';
 
 import { AppError } from '../../errors/AppError';
+import createConnection from '../mongoose';
+
+import swaggerFile from '../../../swagger.json';
+import { router } from './routes';
+
 import '../../../shared/container';
 
 createConnection();
 
 const app = express();
 
-app.use('**/public', express.static('tmp/assets'));
-
 app.use(express.json());
+
+app.use('/public', express.static('tmp/assets'));
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(router);
 
