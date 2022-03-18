@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { CreateUnitController } from '../../../../modules/units/useCases/createUnit/CreateUnitController';
 import { DeleteUnitController } from '../../../../modules/units/useCases/deleteUnit/DeleteUnitController';
+import { GetUnitController } from '../../../../modules/units/useCases/getUnit/GetUnitController';
 import { ListUnitsController } from '../../../../modules/units/useCases/listUnits/ListUnitsController';
 import { ListUnitsByCompanyController } from '../../../../modules/units/useCases/listUnitsByCompany/ListUnitsByCompanyController';
 import { UpdateUnitController } from '../../../../modules/units/useCases/updateUnit/UpdateUnitController';
@@ -15,10 +16,13 @@ const listUnitsController = new ListUnitsController();
 const listUnitsByCompanyController = new ListUnitsByCompanyController();
 const updateUnitController = new UpdateUnitController();
 const deleteUnitController = new DeleteUnitController();
+const getUnitController = new GetUnitController();
 
 unitsRoutes.use(ensureAuthenticated);
 
 unitsRoutes.get('/', listUnitsController.handle);
+
+unitsRoutes.get('/:id', validateObjectId, getUnitController.handle);
 
 unitsRoutes.get(
   '/company/:id',

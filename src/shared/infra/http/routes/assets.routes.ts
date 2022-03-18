@@ -3,6 +3,7 @@ import multer from 'multer';
 import uploadConfig from '../../../../config/upload';
 import { CreateAssetController } from '../../../../modules/assets/useCases/createAsset/CreateAssetController';
 import { DeleteAssetController } from '../../../../modules/assets/useCases/deleteAsset/DeleteAssetController';
+import { GetAssetController } from '../../../../modules/assets/useCases/getAsset/GetAssetController';
 import { ListAssetsController } from '../../../../modules/assets/useCases/listAssets/ListAssetsController';
 import { ListAssetsByUnitController } from '../../../../modules/assets/useCases/listAssetsByUnit/ListAssetsByUnitController';
 import { UpdateAssetController } from '../../../../modules/assets/useCases/updateAsset/UpdateAssetController';
@@ -21,10 +22,13 @@ const listAssetsByUnitController = new ListAssetsByUnitController();
 const updateAssetController = new UpdateAssetController();
 const deleteAssetController = new DeleteAssetController();
 const uploadImageController = new UploadImageController();
+const getAssetController = new GetAssetController();
 
 assetsRoutes.use(ensureAuthenticated);
 
 assetsRoutes.get('/', listAssetsController.handle);
+
+assetsRoutes.get('/:id', validateObjectId, getAssetController.handle);
 
 assetsRoutes.get(
   '/unit/:id',

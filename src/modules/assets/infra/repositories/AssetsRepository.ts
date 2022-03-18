@@ -37,7 +37,9 @@ class AssetsRepository implements IAssetsRepository {
   }
 
   async findById(id: string): Promise<IAsset> {
-    const asset = await this.assetsRepository.findOne({ _id: id });
+    const asset = await this.assetsRepository
+      .findOne({ _id: id })
+      .populate('unit');
     return asset;
   }
 

@@ -26,7 +26,9 @@ class CompaniesRepository {
   }
 
   async findById(id: string): Promise<ICompany> {
-    const company = await this.companiesRepository.findOne({ _id: id });
+    const company = await this.companiesRepository
+      .findOne({ _id: id })
+      .populate('units');
     return company;
   }
 

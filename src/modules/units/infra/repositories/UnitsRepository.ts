@@ -29,7 +29,9 @@ class UnitsRepository implements IUnitsRepository {
   }
 
   async findById(id: string): Promise<IUnit> {
-    const unit = await this.unitsRepository.findOne({ _id: id });
+    const unit = await (
+      await this.unitsRepository.findOne({ _id: id }).populate('assets')
+    ).populate('company');
     return unit;
   }
 
