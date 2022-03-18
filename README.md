@@ -6,7 +6,7 @@
 "Not knowing is no reason not to do it, on the contrary. It is the first step
 to expand your skills" - Bruno Felix, CTO of TRACTIAN.
 
-## 🖥️ Challenge 
+## 🔥 Challenge 
 
 #### Imagine the following situation:
 
