@@ -4,6 +4,8 @@ import { Asset } from '../../../assets/infra/entities/Asset';
 import { IUser, User } from '../../../users/infra/entities/User';
 
 interface ICompany {
+  id: string;
+
   name: string;
 
   description: string;

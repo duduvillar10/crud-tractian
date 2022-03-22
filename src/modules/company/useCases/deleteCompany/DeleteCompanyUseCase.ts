@@ -16,7 +16,7 @@ class DeleteCompanyUseCase {
       throw new AppError("This company doesn't exists!", 404);
     }
 
-    const deletedCompany = await this.companiesRepository.delete(id);
+    await this.companiesRepository.delete(id);
   }
 }
 
